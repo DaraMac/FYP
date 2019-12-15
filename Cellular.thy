@@ -21,6 +21,8 @@ fun cell_lookup :: "location \<Rightarrow> state \<Rightarrow> cell" where
 fun update_cell :: "cell_autom \<Rightarrow> cell \<Rightarrow> cell" where
 "update_cell (s, r) (i, v) = r (cell_lookup (i-1) s) (i, v) (cell_lookup (i+1) s)"
 
+(* does not create new False cells,
+  maybe create a function cell_map? *)
 fun update_state :: "cell_autom \<Rightarrow> state" where
 "update_state (s, r) = map (update_cell (s, r)) s"
 
