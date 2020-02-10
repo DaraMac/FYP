@@ -214,10 +214,9 @@ definition relA :: "(nat \<times> int) set" where
 definition relB :: "nat rel" where
 "relB = {(3,4)}"
 
-value "list (Image relA {1})"
+value "Image relA {1}"
 
-
-
+value "(1::nat) # [2, 3] @ [4]"
 
 
 

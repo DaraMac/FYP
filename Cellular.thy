@@ -8,7 +8,6 @@ type_synonym location = int
 type_synonym cell = "location \<times> cell_val "
 type_synonym state = "cell list"
 
-
 (* Rework to only take cell_vals ? *)
 type_synonym rule = "cell \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell"
 type_synonym cell_autom = "state \<times> rule"
@@ -49,16 +48,15 @@ fun rule110 :: rule where
 "rule110 (_, False) (i, False) (_, True) = (i, True)"  |
 "rule110 (_, False) (i, False) (_, False) = (i, False)"
 
-
+fun null_rule :: rule where
+"null_rule _ (i, _) _ = (i, False)"
 
 definition start_state :: state where
-"start_state = [(-2, False), (-1, False), (0, True), (1, False)]"
+"start_state = [(-4, False), (-3, False), (-2, False), (-1, False), (0, True), (1, False)]"
 
-definition test_110 :: cell_autom where
-"test_110 = (start_state, rule110)"
+definition CA110 :: cell_autom where
+"CA110 = (start_state, rule110)"
 
-
-value "run_t_steps test_110 2"
-
-
+value "set (fst (run_t_steps CA110 3))"
+thm nullity "\<forall> x. set(fst (run_t_steps t null_rule))
 end
