@@ -58,5 +58,5 @@ definition CA110 :: cell_autom where
 "CA110 = (start_state, rule110)"
 
 value "set (fst (run_t_steps CA110 3))"
-thm nullity "\<forall> x. set(fst (run_t_steps t null_rule))
+theorem nullity "\<forall> x. set(fst (run_t_steps t null_rule))"
 end
