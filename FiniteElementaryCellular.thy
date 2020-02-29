@@ -1,4 +1,4 @@
-chapter \<open>Finite Cellular Automata\<close>
+(*chapter \<open>Finite Cellular Automata\<close>*)
 
 theory FiniteElementaryCellular
   imports Main
@@ -76,7 +76,7 @@ fun rule110 :: rule where
 definition CA110 :: CA where
 "CA110 = CA [Zero, Zero, One, Zero] rule110 (left_zero_pad rule110) (right_zero_pad rule110)"
 
-value "run_t_steps CA110 1" 
+(*value "run_t_steps CA110 1"*)
 
 
 
