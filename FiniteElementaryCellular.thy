@@ -22,8 +22,8 @@ definition null_rule :: rule where
 definition null_edge :: edge_rule where
 "null_edge _ _ = Zero"
 
-definition test :: CA where
-"test = CA [One, One, Zero] null_rule null_edge null_edge"
+definition testCA :: CA where
+"testCA = CA [One, One, Zero] null_rule null_edge null_edge"
 
 definition width :: "CA \<Rightarrow> nat" where
 "width ca = length (State ca)"
@@ -69,7 +69,6 @@ fun rule110 :: rule where
 "rule110  One One Zero = One"   |
 "rule110  One Zero One = One"   |
 "rule110  One Zero Zero = Zero" |
-
 "rule110  Zero One One = One"   |
 "rule110  Zero One Zero = One"  |
 "rule110  Zero Zero One = One"  |
@@ -79,10 +78,10 @@ definition CA110 :: CA where
 "CA110 = CA [Zero, Zero, Zero, Zero, One] rule110 (left_zero_pad rule110) (right_zero_pad rule110)"
 
 
+definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>yields\<close>  65) where
+"A yields s = (\<exists> n. State (run_t_steps A n) = s)"
 
+theorem "testCA yields [Zero, Zero, Zero]"
+  apply(simp add)
 
-
-
-(*typedecl state
-consts M :: "(state \<times> state) set*)
 end

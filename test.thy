@@ -220,6 +220,8 @@ value "(1::nat) # [2, 3] @ [4]"
 
 
 
+(*typedecl state
+consts M :: "(state \<times> state) set*)
 
 end
 
