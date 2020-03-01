@@ -44,7 +44,9 @@ fun inner_update :: "CA \<Rightarrow> nat \<Rightarrow> cell" where
 
 fun update_cell :: "CA \<Rightarrow> nat \<Rightarrow> cell" where
 "update_cell ca 0 = left_update ca" |
-"update_cell ca n = (if n = (width ca) then right_update ca else inner_update ca n)"
+"update_cell ca n = (if n = ((width ca)-1) then right_update ca else inner_update ca n)"
+
+
 
 fun update_CA :: "CA \<Rightarrow> CA" where
 "update_CA ca = (CA (map (update_cell ca) [0..<width ca]) (Rule ca) (LeftRule ca) (RightRule ca))"
@@ -74,9 +76,7 @@ fun rule110 :: rule where
 "rule110  Zero Zero Zero = Zero"
 
 definition CA110 :: CA where
-"CA110 = CA [Zero, Zero, One, Zero] rule110 (left_zero_pad rule110) (right_zero_pad rule110)"
-
-(*value "run_t_steps CA110 1"*)
+"CA110 = CA [Zero, Zero, Zero, Zero, One] rule110 (left_zero_pad rule110) (right_zero_pad rule110)"
 
 
 
