@@ -81,7 +81,20 @@ definition CA110 :: CA where
 definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>yields\<close>  65) where
 "A yields s = (\<exists> n. State (run_t_steps A n) = s)"
 
+value "State (run_t_steps testCA 0) = [Zero, Zero, Zero]"
+value "State (run_t_steps testCA 0) = State testCA"
+
+(* re-write in Isar manner *)
+theorem "ca yields State ca"
+  apply(metis State_def apply_t_times.simps(1) le_boolD order_refl run_t_steps.simps yields_def)
+  done
+
+
 theorem "testCA yields [Zero, Zero, Zero]"
-  apply(simp add)
+  apply(simp add: yields_def)
+  apply(rule_tac x=1 in exI)
+  apply(auto)
+  
+ 
 
 end
