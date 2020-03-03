@@ -75,25 +75,58 @@ fun rule110 :: rule where
 "rule110  Zero Zero Zero = Zero"
 
 definition CA110 :: CA where
-"CA110 = CA [Zero, Zero, Zero, Zero, One] rule110 (left_zero_pad rule110) (right_zero_pad rule110)"
+"CA110 \<equiv> CA [Zero, Zero, Zero, Zero, One] rule110 (left_zero_pad rule110) (right_zero_pad rule110)"
 
+
+
+
+(*definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>yields\<close>  65) where
+"A yields s = (\<exists> n. State (run_t_steps A n) = s)"*)
 
 definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>yields\<close>  65) where
-"A yields s = (\<exists> n. State (run_t_steps A n) = s)"
+"A yields s \<equiv> (\<exists> n. State (run_t_steps A n) = s \<and> n > 0)"
 
-value "State (run_t_steps testCA 0) = [Zero, Zero, Zero]"
+definition loops :: "CA \<Rightarrow> bool" where
+"loops ca \<equiv> ca yields State ca"
+
+definition wellformed :: "CA \<Rightarrow> bool" where
+"wellformed ca \<equiv> (width ca \<ge> 3)"
+
+value "State (run_t_steps testCA 1) = [Zero, Zero, Zero]"
 value "State (run_t_steps testCA 0) = State testCA"
 
-(* re-write in Isar manner *)
-theorem "ca yields State ca"
+(* Only valid for old definition *)
+(*theorem "ca yields State ca"
   apply(metis State_def apply_t_times.simps(1) le_boolD order_refl run_t_steps.simps yields_def)
+  done*)
+
+theorem "ca yields State (run_t_steps ca 1)"
+proof-
+  show ?thesis using yields_def by blast
+qed
+
+theorem t1 :"n>0 \<Longrightarrow> ca yields State (run_t_steps ca n)"
+  apply(simp add: yields_def)
+  apply(rule exI)
+  apply(rule conjI)
+  apply(auto)
   done
 
+value "map id ([]:: int list)"
 
+theorem "map (update_cell ca) [0..<width ca] = []"
+
+
+(*prove something about map ca*)
+(*apply(rule_tac x=1 in exI)*)
 theorem "testCA yields [Zero, Zero, Zero]"
   apply(simp add: yields_def)
   apply(rule_tac x=1 in exI)
+  apply(rule conjI)
   apply(auto)
+
+
+  
   
  
 
