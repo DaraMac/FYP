@@ -92,6 +92,15 @@ definition loops :: "CA \<Rightarrow> bool" where
 definition wellformed :: "CA \<Rightarrow> bool" where
 "wellformed ca \<equiv> (width ca \<ge> 3)"
 
+(* maybe add some infix notation for this *)
+(* maybe change to run_t_steps 1 for more precision *)
+fun garden_of_eden :: "CA \<Rightarrow> bool" where
+"garden_of_eden (CA s rule l r) = (\<not>(\<exists> s0. (CA s0 rule l r) yields s))"
+
+definition reversible :: "CA \<Rightarrow> bool" where
+"reversible ca = "
+
+
 value "State (run_t_steps testCA 1) = [Zero, Zero, Zero]"
 value "State (run_t_steps testCA 0) = State testCA"
 
@@ -114,10 +123,14 @@ theorem t1 :"n>0 \<Longrightarrow> ca yields State (run_t_steps ca n)"
 
 value "map id ([]:: int list)"
 
-theorem "map (update_cell ca) [0..<width ca] = []"
+theorem
+  fixes ca :: CA
+  assumes wf : "wellformed ca"
+  shows "map (update_cell ca) [0..<width ca] = left_update ca # (map ) @ [right_update ca]"
+proof -
+qed
 
 
-(*prove something about map ca*)
 (*apply(rule_tac x=1 in exI)*)
 theorem "testCA yields [Zero, Zero, Zero]"
   apply(simp add: yields_def)
