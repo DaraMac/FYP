@@ -1,5 +1,16 @@
 *~
 *.odt
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.lof
+*.log
+*.lot
+*.lol
+*.out
+*.run.xml
+*.toc
 
 papers
 Isabelle2019
