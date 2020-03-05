@@ -1,5 +1,8 @@
 (*chapter \<open>Finite Cellular Automata\<close>*)
 
+(*TODO toroidal 1D CA *)
+(*reference damien's cylinders for those *)
+
 theory FiniteElementaryCellular
   imports Main
 begin
@@ -8,12 +11,10 @@ section \<open>Basic definitions of Finite Elementary Cellular Automata\<close>
 
 (* might re-add width if it might help in proofs?*)
 datatype cell = One | Zero
-(*type_synonym width = nat*)
 type_synonym state = "cell list"
 type_synonym rule = "cell \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell"
 type_synonym edge_rule = "cell \<Rightarrow> cell \<Rightarrow> cell"
 
-(*Width :: width*)
 datatype CA = CA (State : state) (Rule : rule) (LeftRule : edge_rule)  (RightRule : edge_rule)
 
 definition null_rule :: rule where
@@ -28,9 +29,6 @@ definition testCA :: CA where
 definition width :: "CA \<Rightarrow> nat" where
 "width ca = length (State ca)"
 
-
-(* make provisions for width = 1 *)
-(*I think just won't allow*)
 (* first is leftmost *)
 fun left_update :: "CA \<Rightarrow> cell" where
 "left_update ca = (LeftRule ca) ((State ca) ! 0) ((State ca) ! 1)"
@@ -58,27 +56,6 @@ fun apply_t_times :: "('a \<Rightarrow> 'a) \<Rightarrow> 'a \<Rightarrow> nat \
 fun run_t_steps :: "CA \<Rightarrow> nat \<Rightarrow> CA" where
 "run_t_steps ca n = apply_t_times update_CA ca n"
 
-fun left_zero_pad :: "rule \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell" where
-"left_zero_pad rule c1 c2 = rule Zero c1 c2"
-
-fun right_zero_pad :: "rule \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell" where
-"right_zero_pad rule c2 c1 = rule c2 c1 Zero"
-
-fun rule110 :: rule where
-"rule110  One One One = Zero"   |
-"rule110  One One Zero = One"   |
-"rule110  One Zero One = One"   |
-"rule110  One Zero Zero = Zero" |
-"rule110  Zero One One = One"   |
-"rule110  Zero One Zero = One"  |
-"rule110  Zero Zero One = One"  |
-"rule110  Zero Zero Zero = Zero"
-
-definition CA110 :: CA where
-"CA110 \<equiv> CA [Zero, Zero, Zero, Zero, One] rule110 (left_zero_pad rule110) (right_zero_pad rule110)"
-
-
-
 
 (*definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>yields\<close>  65) where
 "A yields s = (\<exists> n. State (run_t_steps A n) = s)"*)
@@ -97,12 +74,9 @@ definition wellformed :: "CA \<Rightarrow> bool" where
 fun garden_of_eden :: "CA \<Rightarrow> bool" where
 "garden_of_eden (CA s rule l r) = (\<not>(\<exists> s0. (CA s0 rule l r) yields s))"
 
-definition reversible :: "CA \<Rightarrow> bool" where
-"reversible ca = "
+fun reversible :: "CA \<Rightarrow> bool" where
+"reversible (CA _ rule l r) = (\<forall>s. (\<exists>!s0. State (run_t_steps (CA s0 rule l r) 1) = s))"
 
-
-value "State (run_t_steps testCA 1) = [Zero, Zero, Zero]"
-value "State (run_t_steps testCA 0) = State testCA"
 
 (* Only valid for old definition *)
 (*theorem "ca yields State ca"
@@ -121,8 +95,6 @@ theorem t1 :"n>0 \<Longrightarrow> ca yields State (run_t_steps ca n)"
   apply(auto)
   done
 
-value "map id ([]:: int list)"
-
 theorem
   fixes ca :: CA
   assumes wf : "wellformed ca"
@@ -131,7 +103,6 @@ proof -
 qed
 
 
-(*apply(rule_tac x=1 in exI)*)
 theorem "testCA yields [Zero, Zero, Zero]"
   apply(simp add: yields_def)
   apply(rule_tac x=1 in exI)
@@ -139,7 +110,26 @@ theorem "testCA yields [Zero, Zero, Zero]"
   apply(auto)
 
 
-  
+
+
+fun left_zero_pad :: "rule \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell" where
+"left_zero_pad rule c1 c2 = rule Zero c1 c2"
+
+fun right_zero_pad :: "rule \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell" where
+"right_zero_pad rule c2 c1 = rule c2 c1 Zero"
+
+fun rule110 :: rule where
+"rule110  One One One = Zero"   |
+"rule110  One One Zero = One"   |
+"rule110  One Zero One = One"   |
+"rule110  One Zero Zero = Zero" |
+"rule110  Zero One One = One"   |
+"rule110  Zero One Zero = One"  |
+"rule110  Zero Zero One = One"  |
+"rule110  Zero Zero Zero = Zero"
+
+definition CA110 :: CA where
+"CA110 \<equiv> CA [Zero, Zero, Zero, Zero, One] rule110 (left_zero_pad rule110) (right_zero_pad rule110)" 
   
  
 
