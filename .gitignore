@@ -1,19 +1,21 @@
 *~
-*.odt
-*.docx
 *.aux
 *.bbl
 *.bcf
 *.blg
+*.docx
+*.docx#
 *.lof
 *.log
-*.lot
 *.lol
+*.lot
+*.odt
 *.out
 *.run.xml
+*.swp
 *.toc
 
-papers
-Isabelle2019
 Final_Year_Project_Handbook.pdf
+Isabelle2019
 dheeraj*
+papers
