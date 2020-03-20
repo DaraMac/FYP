@@ -1,6 +1,5 @@
 (*chapter \<open>Finite Cellular Automata\<close>*)
 
-(*TODO toroidal 1D CA *)
 (*reference damien's cylinders for those *)
 
 theory FiniteElementaryCellular
@@ -9,12 +8,13 @@ begin
 
 section \<open>Basic definitions of Finite Elementary Cellular Automata\<close>
 
-(* might re-add width if it might help in proofs?*)
+(* might re-add width on a type level if it might help in proofs?*)
 datatype cell = One | Zero
 type_synonym state = "cell list"
 type_synonym rule = "cell \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell"
 type_synonym edge_rule = "cell \<Rightarrow> cell \<Rightarrow> cell"
 
+(* could merge all rules into one compositite type *)
 datatype CA = CA (State : state) (Rule : rule) (LeftRule : edge_rule)  (RightRule : edge_rule)
 
 definition null_rule :: rule where
@@ -108,7 +108,6 @@ theorem "testCA yields [Zero, Zero, Zero]"
   apply(rule_tac x=1 in exI)
   apply(rule conjI)
   apply(auto)
-
 
 
 
