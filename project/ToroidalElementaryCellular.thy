@@ -21,10 +21,6 @@ fun nbhds :: "state \<Rightarrow> neighbourhood list" where
 fun update_CA :: "CA \<Rightarrow> CA" where
 "update_CA (CA s r) = CA (map r (nbhds s)) r"
 
-fun apply_t_times :: "('a \<Rightarrow> 'a) \<Rightarrow> 'a \<Rightarrow> nat \<Rightarrow> 'a" where
-"apply_t_times f a 0 = a" |
-"apply_t_times f a (Suc n) = apply_t_times f (f a) n"
-
 fun run_t_steps :: "CA \<Rightarrow> nat \<Rightarrow> CA" where
 "run_t_steps ca n = apply_t_times update_CA ca n"
 
