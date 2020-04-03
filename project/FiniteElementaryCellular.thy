@@ -10,41 +10,6 @@ section \<open>Basic definitions of Finite Elementary Cellular Automata\<close>
 (* Going to go with left/right boundaries as Zero by default *)
 (* Might like that to be flexible somehow? Without ruining CA type def*)
 
-(*
-(* might re-add width on a type level if it might help in proofs?*)
-datatype cell = One | Zero
-type_synonym state = "cell list"
-type_synonym rule = "cell \<Rightarrow> cell \<Rightarrow> cell \<Rightarrow> cell"
-type_synonym edge_rule = "cell \<Rightarrow> cell \<Rightarrow> cell"
-
-(* could merge all rules into one compositite type *)
-datatype CA = CA (State : state) (Rule : rule) (LeftRule : edge_rule)  (RightRule : edge_rule)
-
-
-
-definition null_edge :: edge_rule where
-"null_edge _ _ = Zero"
-*)
-
-(*
-(* first is leftmost *)
-fun left_update :: "CA \<Rightarrow> cell" where
-"left_update ca = (LeftRule ca) ((State ca) ! 0) ((State ca) ! 1)"
-
-(* second is rightmost *)
-fun right_update :: "CA \<Rightarrow> cell" where
-"right_update ca = (let n = (width ca)-1 in (RightRule ca) ((State ca) ! (n-1)) ((State ca) ! n))"
-
-fun inner_update :: "CA \<Rightarrow> nat \<Rightarrow> cell" where
-"inner_update (CA state rule _ _) n = rule (state ! (n-1)) (state ! n) (state ! (n+1))" 
-
-fun update_cell :: "CA \<Rightarrow> nat \<Rightarrow> cell" where
-"update_cell ca 0 = left_update ca" |
-"update_cell ca n = (if n = ((width ca)-1) then right_update ca else inner_update ca n)"*)
-
-(*fun update_CA :: "CA \<Rightarrow> CA" where
-"update_CA ca = (CA (map (update_cell ca) [0..<width ca]) (Rule ca) (LeftRule ca) (RightRule ca))"*)
-
 fun nbhds :: "state \<Rightarrow> neighbourhood list" where
 "nbhds [] = []" | (*this should never happen*)
 "nbhds (x#xs) = ((Nb Zero x (hd xs)) # (inner_nbhds (x#xs))) @ [Nb (last (butlast xs)) (last xs) Zero]"
