@@ -50,12 +50,23 @@ fun garden_of_eden :: "CA \<Rightarrow> bool" where
 
 fun reversible :: "CA \<Rightarrow> bool" where
 "reversible (CA _ rule l r) = (\<forall>s. (\<exists>!s0. State (run_t_steps (CA s0 rule l r) 1) = s))"*)
+fun flip :: "cell \<Rightarrow> cell" where
+"flip One = Zero" |
+"flip Zero = One"
+
+fun flip_nb :: "neighbourhood \<Rightarrow> neighbourhood" where
+"flip_nb (Nb a b c) = Nb (flip a) (flip b) (flip c)"
 
 fun mirror :: "rule \<Rightarrow> rule" where
 "mirror r (Nb a b c)= r (Nb c b a)"
 
 definition amphichiral :: "rule \<Rightarrow> bool" where
 "amphichiral r \<equiv> r = (mirror r)"
+
+fun complement :: "rule \<Rightarrow> rule" where
+"complement r nb = flip (r (flip_nb nb))"
+
+
 
 
 subsection \<open>Concrete base examples\<close>
