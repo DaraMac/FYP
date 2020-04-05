@@ -1,7 +1,8 @@
 theory CellularBase
-  imports Main
+  imports Main 
 begin
 
+(* factor out Rule stuff even more and apply_t_times *)
 section \<open>Base datatypes and definitions common to all Cellular Automata\<close>
 (* Might end up having different bases between 1 and 2D*)
 (* perhaps typeclass them so well-formed works on all? *)
@@ -39,23 +40,15 @@ definition width :: "CA \<Rightarrow> nat" where
 definition wellformed :: "CA \<Rightarrow> bool" where
 "wellformed ca \<equiv> (width ca \<ge> 3)"
 
-(*definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>yields\<close>  65) where
-"A yields s \<equiv> (\<exists> n. State (run_t_steps A n) = s \<and> n > 0)"
-
-definition loops :: "CA \<Rightarrow> bool" where
-"loops ca \<equiv> ca yields State ca"
-
-fun garden_of_eden :: "CA \<Rightarrow> bool" where
-"garden_of_eden (CA s rule l r) = (\<not>(\<exists> s0. (CA s0 rule l r) yields s))"
-
-fun reversible :: "CA \<Rightarrow> bool" where
-"reversible (CA _ rule l r) = (\<forall>s. (\<exists>!s0. State (run_t_steps (CA s0 rule l r) 1) = s))"*)
 fun flip :: "cell \<Rightarrow> cell" where
 "flip One = Zero" |
 "flip Zero = One"
 
 fun flip_nb :: "neighbourhood \<Rightarrow> neighbourhood" where
 "flip_nb (Nb a b c) = Nb (flip a) (flip b) (flip c)"
+
+fun sum_nb :: "neighbourhood \<Rightarrow> nat" where
+"sum_nb (Nb a b c) = count_list [a, b, c] One"
 
 fun mirror :: "rule \<Rightarrow> rule" where
 "mirror r (Nb a b c)= r (Nb c b a)"
@@ -66,7 +59,8 @@ definition amphichiral :: "rule \<Rightarrow> bool" where
 fun complement :: "rule \<Rightarrow> rule" where
 "complement r nb = flip (r (flip_nb nb))"
 
-
+definition totalistic :: "rule \<Rightarrow> bool" where
+"totalistic r \<equiv> (\<forall> nb1 nb2. sum_nb nb1 = sum_nb nb2 \<longrightarrow> (r nb1) = (r nb2))"
 
 
 subsection \<open>Concrete base examples\<close>
