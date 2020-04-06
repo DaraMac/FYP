@@ -1,12 +1,8 @@
-theory InfiniteElementaryCellular
-  imports Main
+theory Infinite_Elementary_CA
+  imports CA_Base
 begin
 
-datatype cell = Zero | One
-
 type_synonym state = "int \<Rightarrow> cell"
-datatype neighbourhood = Nb cell cell cell
-type_synonym rule = "neighbourhood \<Rightarrow> cell"
 
 datatype CA = CA (State : state) (Rule : rule)
 
@@ -39,5 +35,5 @@ definition state1 :: state where
 definition rule110 :: CA where
 "rule110 \<equiv> CA state1 r110"
 
-value "State (run_t_steps rule110 5) (-3)"
+value "State (run_t_steps rule110 5) (-5)"
 end

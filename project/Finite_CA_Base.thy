@@ -1,5 +1,5 @@
-theory CellularBase
-  imports Main 
+theory Finite_CA_Base
+  imports CA_Base
 begin
 
 (* factor out Rule stuff even more and apply_t_times *)
@@ -9,16 +9,10 @@ section \<open>Base datatypes and definitions common to all Cellular Automata\<c
 
 subsection \<open>Basis type of all elementary 1D CA\<close>
 
-datatype cell = One | Zero
 type_synonym state = "cell list"
-datatype neighbourhood = Nb cell cell cell 
-type_synonym rule = "neighbourhood \<Rightarrow> cell"
 
 datatype CA = CA (State : state) (Rule : rule)
 
-consts nbhds :: "state \<Rightarrow> neighbourhood list" (* This doesn't really do anything helpful yet *)
-
-(* 1D only *)
 fun inner_nbhds :: "state \<Rightarrow> neighbourhood list" where
 "inner_nbhds (x#y#z#[]) = (Nb x y z) # []" |
 "inner_nbhds (x#y#z#zs) = (Nb x y z) # (inner_nbhds (y#z#zs))" |
