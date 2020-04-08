@@ -1,5 +1,5 @@
 theory Infinite_Elementary_CA
-  imports CA_Base
+  imports Elementary_CA_Base
 begin
 
 type_synonym state = "int \<Rightarrow> cell"

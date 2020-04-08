@@ -13,6 +13,7 @@ definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>
 definition loops :: "CA \<Rightarrow> bool" where
 "loops ca \<equiv> ca yields State ca"
 
+(* TODO reframe in terms of rules only *)
 fun reversible :: "CA \<Rightarrow> bool" where
 "reversible (CA _ r) = (\<forall>s. (\<exists>!s0. State (update_CA (CA s0 r)) = s))"
 
@@ -20,9 +21,14 @@ fun reversible :: "CA \<Rightarrow> bool" where
 fun garden_of_eden :: "CA \<Rightarrow> bool" where
 "garden_of_eden (CA s r) = (\<not>(\<exists> s0. State (update_CA (CA s0 r)) = s))"
 
-lemma "garden_of_eden ca \<Longrightarrow> \<not>reversible ca"
-  by (metis garden_of_eden.elims(2) reversible.simps)
+definition orphan :: "state \<Rightarrow> rule \<Rightarrow> bool" where
+"orphan s0 r = (\<forall> sl sr. garden_of_eden (CA (sl@s0@sr) r))"
 
+lemma "garden_of_eden ca \<Longrightarrow> \<not>reversible ca"
+  apply (metis garden_of_eden.elims(2) reversible.simps)
+done
+
+(*lemma "garden_of_eden (CA s r) \<Longrightarrow> (\<exists> s0. (orphan s0 r) \<and> (\<exists> sl sr. (sl@s0@sr) = s))"*)
 
 definition class1 :: "rule \<Rightarrow> bool" where
 "class1 r \<equiv> (\<exists>! f. (\<forall> s. (CA s r) yields f \<and> uniform f \<and> stable (CA f r)))"

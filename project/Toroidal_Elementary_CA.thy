@@ -1,7 +1,7 @@
 (*reference damien's cylinders for these *)
 
 theory Toroidal_Elementary_CA
-  imports Finite_CA_Base
+  imports Finite_Elementary_CA_Base
 begin
 
 section \<open>Basic definitions of Toroidal Elementary Cellular Automata\<close>

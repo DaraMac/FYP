@@ -2,8 +2,8 @@
 
 (*reference damien's cylinders for those *)
 
-theory Finite_Elementary_CA
-  imports Finite_CA_Base
+theory Bounded_Elementary_CA
+  imports Finite_Elementary_CA_Base
 begin
 
 section \<open>Basic definitions of Finite Elementary Cellular Automata\<close>

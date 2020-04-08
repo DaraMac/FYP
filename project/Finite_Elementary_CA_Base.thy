@@ -1,10 +1,10 @@
-theory Finite_CA_Base
-  imports CA_Base
+theory Finite_Elementary_CA_Base
+  imports Elementary_CA_Base
 begin
 
 section \<open>Base datatypes and definitions common to all Finite Elementary Cellular Automata\<close>
 
-subsection \<open>Basis type of all elementary 1D CA\<close>
+subsection \<open>Basis type of all finite elementary 1D CA\<close>
 
 type_synonym state = "cell list"
 
