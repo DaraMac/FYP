@@ -38,13 +38,13 @@ definition null_rule :: rule where
 "null_rule _ = Zero"
 
 fun r110 :: rule where
-"r110  (Nb One One One) = Zero"   |
-"r110  (Nb One One Zero) = One"   |
-"r110  (Nb One Zero One) = One"   |
-"r110  (Nb One Zero Zero) = Zero" |
-"r110  (Nb Zero One One) = One"   |
-"r110  (Nb Zero One Zero) = One"  |
-"r110  (Nb Zero Zero One) = One"  |
+"r110  (Nb One  One  One)  = Zero" |
+"r110  (Nb One  One  Zero) = One"  |
+"r110  (Nb One  Zero One)  = One"  |
+"r110  (Nb One  Zero Zero) = Zero" |
+"r110  (Nb Zero One  One)  = One"  |
+"r110  (Nb Zero One  Zero) = One"  |
+"r110  (Nb Zero Zero One)  = One"  |
 "r110  (Nb Zero Zero Zero) = Zero"
 
 end

@@ -10,8 +10,11 @@ section \<open>Basic definitions of Finite Elementary Cellular Automata\<close>
 (* Going to go with left/right boundaries as Zero by default *)
 (* Might like that to be flexible somehow? Without ruining CA type def*)
 
+(* doesnt need wellformed anymore!*)
 fun nbhds :: "state \<Rightarrow> neighbourhood list" where
 "nbhds [] = []" | (*this should never happen*)
+"nbhds (x#[]) = [(Nb Zero x Zero)]" |
+"nbhds (x#y#[]) = [(Nb Zero x y), (Nb x y Zero)]" |
 "nbhds (x#xs) = ((Nb Zero x (hd xs)) # (inner_nbhds (x#xs))) @ [Nb (last (butlast xs)) (last xs) Zero]"
 
 fun update_CA :: "CA \<Rightarrow> CA" where
