@@ -22,6 +22,4 @@ subsection \<open> Basic CA Rule Examples \<close>
 
 definition rule110 :: CA where
 "rule110 \<equiv> CA [Zero, One, Zero] r110"
-
-
 end
