@@ -3,4 +3,7 @@ Report
 
 Must be compiled with `xelatex --shell-escape`.
 
-TODO make a simplified graph without properties files
+
+Talking Points
+--------------
+- How had to replace general function equality defs with foralls for proof ease

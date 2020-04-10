@@ -4,11 +4,11 @@ session project = HOL +
     A
     B*)
   theories
-    Bounded_Elementary_CA_Properties
-    Toroidal_Elementary_CA_Properties
-    Infinite_Elementary_CA_Properties
-    Bounded_TwoDim_CA_Properties
-    Toroidal_TwoDim_CA_Properties
-    Infinite_TwoDim_CA_Properties
+    Bounded_Elementary_CA
+    Toroidal_Elementary_CA
+    Infinite_Elementary_CA
+    Bounded_TwoDim_CA
+    Toroidal_TwoDim_CA
+    Infinite_TwoDim_CA
   document_files
     "root.tex"

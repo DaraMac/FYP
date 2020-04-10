@@ -14,4 +14,14 @@ fun apply_t_times :: "('a \<Rightarrow> 'a) \<Rightarrow> 'a \<Rightarrow> nat \
 "apply_t_times f a 0 = a" |
 "apply_t_times f a (Suc n) = apply_t_times f (f a) n"
 
+
+lemma flip_cancel [simp]:"flip (flip c) = c"
+apply(induction c)
+apply(auto)
+done
+
+lemma apply_once [simp]: "apply_t_times f a 1 = (f a)"
+apply(auto)
+done
+
 end

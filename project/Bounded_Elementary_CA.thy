@@ -18,8 +18,8 @@ fun nbhds :: "state \<Rightarrow> neighbourhood list" where
 fun update_CA :: "CA \<Rightarrow> CA" where
 "update_CA (CA s r) = CA (map r (nbhds s)) r"
 
-fun run_t_steps :: "CA \<Rightarrow> nat \<Rightarrow> CA" where
-"run_t_steps ca n = apply_t_times update_CA ca n"
+fun run :: "CA \<Rightarrow> nat \<Rightarrow> CA" where
+"run ca n = apply_t_times update_CA ca n"
 
 
 subsection \<open>Properties\<close>
@@ -28,7 +28,7 @@ definition stable :: "CA \<Rightarrow> bool" where
 "stable ca \<equiv> State (update_CA ca) = State ca"
 
 definition yields :: "CA \<Rightarrow> state \<Rightarrow> bool" (infixr \<open>yields\<close>  65) where
-"A yields s \<equiv> (\<exists> n. State (run_t_steps A n) = s \<and> n > 0)"
+"A yields s \<equiv> (\<exists> n. State (run A n) = s \<and> n > 0)"
 
 definition loops :: "CA \<Rightarrow> bool" where
 "loops ca \<equiv> ca yields State ca"
@@ -41,12 +41,12 @@ fun garden_of_eden :: "CA \<Rightarrow> bool" where
 fun reversible :: "CA \<Rightarrow> bool" where
 "reversible (CA _ r) = (\<forall>s. (\<exists>!s0. State (update_CA (CA s0 r)) = s))"
 
-theorem "ca yields State (run_t_steps ca 1)"
+theorem "ca yields State (run ca 1)"
 proof-
   show ?thesis using yields_def by blast
 qed
 
-theorem t1 :"n>0 \<Longrightarrow> ca yields State (run_t_steps ca n)"
+theorem t1 :"n>0 \<Longrightarrow> ca yields State (run ca n)"
   apply(simp add: yields_def)
   apply(rule exI)
   apply(rule conjI)
