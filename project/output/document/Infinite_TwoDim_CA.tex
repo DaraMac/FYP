@@ -1,0 +1,103 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Infinite{\isacharunderscore}TwoDim{\isacharunderscore}CA}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Infinite 2D Cellular Automata%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Infinite{\isacharunderscore}TwoDim{\isacharunderscore}CA\isanewline
+\ \ \isakeyword{imports}\ TwoDim{\isacharunderscore}CA{\isacharunderscore}Base\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\ \ \isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ state\ {\isacharequal}\ {\isachardoublequoteopen}int\ {\isasymRightarrow}\ int\ {\isasymRightarrow}\ cell{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ CA\ {\isacharequal}\ CA\ {\isacharparenleft}State\ {\isacharcolon}\ state{\isacharparenright}\ {\isacharparenleft}Rule\ {\isacharcolon}\ rule{\isacharparenright}\isanewline
+\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ update{\isacharunderscore}state\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ state{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}update{\isacharunderscore}state\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ x\ y\ {\isacharequal}\ r\ {\isacharparenleft}Nb\ {\isacharparenleft}s\ {\isacharparenleft}x{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}y{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}s\ x\ {\isacharparenleft}y{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}s\ {\isacharparenleft}x{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}y{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}s\ {\isacharparenleft}x{\isacharminus}{\isadigit{1}}{\isacharparenright}\ \ y{\isacharparenright}\ \ \ \ {\isacharparenleft}s\ x\ \ y{\isacharparenright}\ \ \ \ {\isacharparenleft}s\ {\isacharparenleft}x{\isacharplus}{\isadigit{1}}{\isacharparenright}\ \ y{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}s\ {\isacharparenleft}x{\isacharminus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}y{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}s\ x\ {\isacharparenleft}y{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}s\ {\isacharparenleft}x{\isacharplus}{\isadigit{1}}{\isacharparenright}\ {\isacharparenleft}y{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ update{\isacharunderscore}CA\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ CA{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}update{\isacharunderscore}CA\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ {\isacharequal}\ CA\ {\isacharparenleft}update{\isacharunderscore}state\ {\isacharparenleft}CA\ s\ r{\isacharparenright}{\isacharparenright}\ r{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ run{\isacharunderscore}t{\isacharunderscore}steps\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ CA{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}run{\isacharunderscore}t{\isacharunderscore}steps\ ca\ n\ {\isacharequal}\ apply{\isacharunderscore}t{\isacharunderscore}times\ update{\isacharunderscore}CA\ ca\ n{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/College/CS460-Final_Year_Project/project/Infinite_TwoDim_CA.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%35=5%:%
+%:%38=6%:%
+%:%39=7%:%
+%:%40=7%:%
+%:%41=8%:%
+%:%42=9%:%
+%:%43=9%:%
+%:%44=10%:%
+%:%45=11%:%
+%:%46=12%:%
+%:%47=12%:%
+%:%48=13%:%
+%:%50=15%:%
+%:%51=16%:%
+%:%52=17%:%
+%:%53=17%:%
+%:%54=18%:%
+%:%55=19%:%
+%:%56=20%:%
+%:%57=20%:%
+%:%58=21%:%
+%:%65=22%:%

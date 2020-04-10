@@ -1,3 +1,5 @@
+section \<open> Cellular Automata Base\<close>
+
 theory CA_Base
   imports Main
 begin

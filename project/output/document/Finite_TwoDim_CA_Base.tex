@@ -1,0 +1,192 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Finite{\isacharunderscore}TwoDim{\isacharunderscore}CA{\isacharunderscore}Base}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Finite 2D Cellular Automata Base%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Finite{\isacharunderscore}TwoDim{\isacharunderscore}CA{\isacharunderscore}Base\isanewline
+\ \ \isakeyword{imports}\ TwoDim{\isacharunderscore}CA{\isacharunderscore}Base\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\ \ \isanewline
+\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ state\ {\isacharequal}\ {\isachardoublequoteopen}cell\ list\ list{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ CA\ {\isacharequal}\ CA\ {\isacharparenleft}State\ {\isacharcolon}\ state{\isacharparenright}\ {\isacharparenleft}Rule\ {\isacharcolon}\ rule{\isacharparenright}%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Simple properties for CA%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+\isacommand{definition}\isamarkupfalse%
+\ width\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}width\ s\ {\isasymequiv}\ length\ s{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ height\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}height\ s\ {\isacharequal}\ length\ {\isacharparenleft}hd\ s{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ int{\isacharunderscore}width\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ int{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}int{\isacharunderscore}width\ s\ {\isasymequiv}\ int\ {\isacharparenleft}width\ s{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ int{\isacharunderscore}height\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ int{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}int{\isacharunderscore}height\ s\ {\isasymequiv}\ int\ {\isacharparenleft}height\ s{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ widthCA\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}widthCA\ ca\ {\isacharequal}\ width\ {\isacharparenleft}State\ ca{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ heightCA\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}heightCA\ ca\ {\isacharequal}\ height\ {\isacharparenleft}State\ ca{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ wellformed\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}wellformed\ s\ {\isasymequiv}\ {\isacharparenleft}width\ s\ {\isasymge}\ {\isadigit{3}}{\isacharparenright}\ {\isasymand}\ {\isacharparenleft}height\ s\ {\isasymge}\ {\isadigit{3}}{\isacharparenright}\ {\isasymand}\ {\isacharparenleft}{\isasymforall}\ i{\isachardot}\ length\ {\isacharparenleft}s\ {\isacharbang}\ {\isacharparenleft}i\ mod\ {\isacharparenleft}width\ s{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ height\ s{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ uniform\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}uniform\ s\ {\isasymequiv}\ length\ {\isacharparenleft}remdups\ s{\isacharparenright}\ {\isacharequal}\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ oneCentre\ {\isacharcolon}{\isacharcolon}\ state\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}oneCentre\ {\isasymequiv}\ {\isacharbrackleft}{\isacharbrackleft}Zero{\isacharcomma}\ Zero{\isacharcomma}\ Zero{\isacharbrackright}{\isacharcomma}\ {\isacharbrackleft}Zero{\isacharcomma}\ One{\isacharcomma}\ Zero{\isacharbrackright}{\isacharcomma}\ {\isacharbrackleft}Zero{\isacharcomma}\ Zero{\isacharcomma}\ Zero{\isacharbrackright}{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ toroidalBlinker\ {\isacharcolon}{\isacharcolon}\ state\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}toroidalBlinker\ {\isasymequiv}\isanewline
+\ {\isacharbrackleft}replicate\ {\isadigit{5}}\ Zero{\isacharcomma}\isanewline
+\ {\isacharbrackleft}Zero\ {\isacharcomma}Zero{\isacharcomma}\ One{\isacharcomma}\ Zero{\isacharcomma}\ Zero{\isacharbrackright}{\isacharcomma}\isanewline
+\ {\isacharbrackleft}Zero{\isacharcomma}\ Zero{\isacharcomma}\ One{\isacharcomma}\ Zero{\isacharcomma}\ Zero{\isacharbrackright}{\isacharcomma}\isanewline
+\ {\isacharbrackleft}Zero{\isacharcomma}\ Zero{\isacharcomma}\ One{\isacharcomma}\ Zero{\isacharcomma}\ Zero{\isacharbrackright}{\isacharcomma}\isanewline
+\ replicate\ {\isadigit{5}}\ Zero{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ boundedBlinker\ {\isacharcolon}{\isacharcolon}\ state\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}boundedBlinker\ {\isasymequiv}\ {\isacharbrackleft}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}Zero{\isacharcomma}\ One{\isacharcomma}\ Zero{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}Zero{\isacharcomma}\ One{\isacharcomma}\ Zero{\isacharbrackright}{\isacharcomma}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackleft}Zero{\isacharcomma}\ One{\isacharcomma}\ Zero{\isacharbrackright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbrackright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/College/CS460-Final_Year_Project/project/Finite_TwoDim_CA_Base.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%35=5%:%
+%:%38=6%:%
+%:%39=7%:%
+%:%40=8%:%
+%:%41=8%:%
+%:%42=9%:%
+%:%43=10%:%
+%:%44=10%:%
+%:%51=13%:%
+%:%61=15%:%
+%:%62=15%:%
+%:%63=16%:%
+%:%64=17%:%
+%:%65=18%:%
+%:%66=18%:%
+%:%67=19%:%
+%:%68=20%:%
+%:%69=21%:%
+%:%70=21%:%
+%:%71=22%:%
+%:%72=23%:%
+%:%73=24%:%
+%:%74=24%:%
+%:%75=25%:%
+%:%76=26%:%
+%:%77=27%:%
+%:%78=27%:%
+%:%79=28%:%
+%:%80=29%:%
+%:%81=30%:%
+%:%82=30%:%
+%:%83=31%:%
+%:%84=32%:%
+%:%85=33%:%
+%:%86=33%:%
+%:%87=34%:%
+%:%88=35%:%
+%:%89=36%:%
+%:%90=37%:%
+%:%91=37%:%
+%:%92=38%:%
+%:%93=39%:%
+%:%94=40%:%
+%:%95=40%:%
+%:%96=41%:%
+%:%97=42%:%
+%:%98=43%:%
+%:%99=43%:%
+%:%100=44%:%
+%:%105=49%:%
+%:%106=50%:%
+%:%107=51%:%
+%:%108=51%:%
+%:%109=52%:%
+%:%113=56%:%
+%:%120=57%:%

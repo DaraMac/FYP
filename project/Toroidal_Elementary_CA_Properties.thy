@@ -1,8 +1,8 @@
+section \<open>Toroidal Elementary Cellular Automata Properties\<close>
+
 theory Toroidal_Elementary_CA_Properties
   imports Toroidal_Elementary_CA
 begin
-
-section \<open>Important Property Definitions\<close>
 
 definition stable :: "CA \<Rightarrow> bool" where
 "stable ca \<equiv> State (update_CA ca) = State ca"

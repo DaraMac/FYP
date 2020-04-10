@@ -1,3 +1,5 @@
+section \<open>Infinite 2D Cellular Automata\<close>
+
 theory Infinite_TwoDim_CA
   imports TwoDim_CA_Base
 begin

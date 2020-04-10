@@ -1,8 +1,8 @@
+section \<open>Finite Elementary Cellular Automata Base\<close>
+
 theory Finite_Elementary_CA_Base
   imports Elementary_CA_Base
 begin
-
-section \<open>Base datatypes and definitions common to all Finite Elementary Cellular Automata\<close>
 
 subsection \<open>Basis type of all finite elementary 1D CA\<close>
 

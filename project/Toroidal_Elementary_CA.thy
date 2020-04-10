@@ -1,10 +1,10 @@
+section \<open>Toroidal Elementary Cellular Automata\<close>
 (*reference damien's cylinders for these *)
 
 theory Toroidal_Elementary_CA
   imports Finite_Elementary_CA_Base
 begin
 
-section \<open>Basic definitions of Toroidal Elementary Cellular Automata\<close>
 
 fun nbhds :: "state \<Rightarrow> neighbourhood list" where
 "nbhds [] = []" | (*this should never happen*)

@@ -1,0 +1,90 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{CA{\isacharunderscore}Base}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Cellular Automata Base%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ CA{\isacharunderscore}Base\isanewline
+\ \ \isakeyword{imports}\ Main\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ cell\ {\isacharequal}\ Zero\ {\isacharbar}\ One\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ flip\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}cell\ {\isasymRightarrow}\ cell{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}flip\ One\ {\isacharequal}\ Zero{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+{\isachardoublequoteopen}flip\ Zero\ {\isacharequal}\ One{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ apply{\isacharunderscore}t{\isacharunderscore}times\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}{\isacharprime}a\ {\isasymRightarrow}\ {\isacharprime}a{\isacharparenright}\ {\isasymRightarrow}\ {\isacharprime}a\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ {\isacharprime}a{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}apply{\isacharunderscore}t{\isacharunderscore}times\ f\ a\ {\isadigit{0}}\ {\isacharequal}\ a{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+{\isachardoublequoteopen}apply{\isacharunderscore}t{\isacharunderscore}times\ f\ a\ {\isacharparenleft}Suc\ n{\isacharparenright}\ {\isacharequal}\ apply{\isacharunderscore}t{\isacharunderscore}times\ f\ {\isacharparenleft}f\ a{\isacharparenright}\ n{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/College/CS460-Final_Year_Project/project/CA_Base.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%35=5%:%
+%:%38=6%:%
+%:%39=7%:%
+%:%40=7%:%
+%:%41=8%:%
+%:%42=9%:%
+%:%43=9%:%
+%:%44=10%:%
+%:%45=11%:%
+%:%46=12%:%
+%:%47=13%:%
+%:%48=13%:%
+%:%49=14%:%
+%:%50=15%:%
+%:%53=16%:%
+%:%58=17%:%

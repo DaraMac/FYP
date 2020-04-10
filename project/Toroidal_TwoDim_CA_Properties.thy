@@ -1,3 +1,5 @@
+section \<open>Toroidal 2D Cellular Automata Properties\<close>
+
 theory Toroidal_TwoDim_CA_Properties
   imports Toroidal_TwoDim_CA
 begin

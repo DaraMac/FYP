@@ -1,3 +1,5 @@
+section \<open>Toroidal 2D Cellular Automata\<close>
+
 theory Toroidal_TwoDim_CA
   imports Finite_TwoDim_CA_Base
 begin

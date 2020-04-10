@@ -1,4 +1,4 @@
-chapter \<open>Cellular Automata Basics\<close>
+section \<open>Elementary Cellular Automata Base\<close>
 
 theory Elementary_CA_Base
   imports CA_Base
@@ -17,7 +17,7 @@ fun sum_nb :: "neighbourhood \<Rightarrow> nat" where
 "sum_nb (Nb a b c) = count_list [a, b, c] One"
 
 
-section \<open>Basic Rule Properties\<close>
+subsection \<open>Basic Rule Properties\<close>
 
 fun mirror :: "rule \<Rightarrow> rule" where
 "mirror r (Nb a b c)= r (Nb c b a)"

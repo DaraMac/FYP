@@ -1,3 +1,5 @@
+section \<open>Finite 2D Cellular Automata Base\<close>
+
 theory Finite_TwoDim_CA_Base
   imports TwoDim_CA_Base
 begin
@@ -39,7 +41,7 @@ definition oneCentre :: state where
 "oneCentre \<equiv> [[Zero, Zero, Zero], [Zero, One, Zero], [Zero, Zero, Zero]]"
 
 definition toroidalBlinker :: state where
-"blinker \<equiv>
+"toroidalBlinker \<equiv>
  [replicate 5 Zero,
  [Zero ,Zero, One, Zero, Zero],
  [Zero, Zero, One, Zero, Zero],

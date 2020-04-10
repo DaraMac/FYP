@@ -1,3 +1,5 @@
+section \<open>2D Cellular Automata Base\<close>
+
 theory TwoDim_CA_Base
   imports CA_Base
 begin

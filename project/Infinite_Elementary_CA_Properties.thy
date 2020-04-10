@@ -1,3 +1,5 @@
+section \<open>Infinite Elementary Cellular Automata Properties\<close>
+
 theory Infinite_Elementary_CA_Properties
   imports Infinite_Elementary_CA
 begin

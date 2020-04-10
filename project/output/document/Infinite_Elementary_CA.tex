@@ -1,0 +1,135 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Infinite{\isacharunderscore}Elementary{\isacharunderscore}CA}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Infinite Elementary Cellular Automata%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Infinite{\isacharunderscore}Elementary{\isacharunderscore}CA\isanewline
+\ \ \isakeyword{imports}\ Elementary{\isacharunderscore}CA{\isacharunderscore}Base\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ state\ {\isacharequal}\ {\isachardoublequoteopen}int\ {\isasymRightarrow}\ cell{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ CA\ {\isacharequal}\ CA\ {\isacharparenleft}State\ {\isacharcolon}\ state{\isacharparenright}\ {\isacharparenleft}Rule\ {\isacharcolon}\ rule{\isacharparenright}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ update{\isacharunderscore}state\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ state{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}update{\isacharunderscore}state\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ n\ {\isacharequal}\ r\ {\isacharparenleft}Nb\ {\isacharparenleft}s\ {\isacharparenleft}n{\isacharminus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}s\ n{\isacharparenright}\ {\isacharparenleft}s\ {\isacharparenleft}n{\isacharplus}{\isadigit{1}}{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ update{\isacharunderscore}CA\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ CA{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}update{\isacharunderscore}CA\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ {\isacharequal}\ CA\ {\isacharparenleft}update{\isacharunderscore}state\ {\isacharparenleft}CA\ s\ r{\isacharparenright}{\isacharparenright}\ r{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ run{\isacharunderscore}t{\isacharunderscore}steps\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ CA{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}run{\isacharunderscore}t{\isacharunderscore}steps\ ca\ n\ {\isacharequal}\ apply{\isacharunderscore}t{\isacharunderscore}times\ update{\isacharunderscore}CA\ ca\ n{\isachardoublequoteclose}%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Example CAs%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+\isacommand{definition}\isamarkupfalse%
+\ state{\isadigit{1}}\ {\isacharcolon}{\isacharcolon}\ state\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}state{\isadigit{1}}\ s\ {\isasymequiv}\ {\isacharparenleft}if\ s\ {\isacharequal}\ {\isadigit{0}}\ then\ One\ else\ Zero{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ rule{\isadigit{1}}{\isadigit{1}}{\isadigit{0}}\ {\isacharcolon}{\isacharcolon}\ CA\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}rule{\isadigit{1}}{\isadigit{1}}{\isadigit{0}}\ {\isasymequiv}\ CA\ state{\isadigit{1}}\ r{\isadigit{1}}{\isadigit{1}}{\isadigit{0}}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{value}\isamarkupfalse%
+\ {\isachardoublequoteopen}State\ {\isacharparenleft}run{\isacharunderscore}t{\isacharunderscore}steps\ rule{\isadigit{1}}{\isadigit{1}}{\isadigit{0}}\ {\isadigit{5}}{\isacharparenright}\ {\isacharparenleft}{\isacharminus}{\isadigit{3}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/College/CS460-Final_Year_Project/project/Infinite_Elementary_CA.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%35=5%:%
+%:%38=6%:%
+%:%39=7%:%
+%:%40=7%:%
+%:%41=8%:%
+%:%42=9%:%
+%:%43=9%:%
+%:%44=10%:%
+%:%45=11%:%
+%:%46=11%:%
+%:%47=12%:%
+%:%48=13%:%
+%:%49=14%:%
+%:%50=14%:%
+%:%51=15%:%
+%:%52=16%:%
+%:%53=17%:%
+%:%54=17%:%
+%:%55=18%:%
+%:%62=21%:%
+%:%72=23%:%
+%:%73=23%:%
+%:%74=24%:%
+%:%75=25%:%
+%:%76=26%:%
+%:%77=26%:%
+%:%78=27%:%
+%:%79=28%:%
+%:%80=29%:%
+%:%81=29%:%
+%:%88=30%:%

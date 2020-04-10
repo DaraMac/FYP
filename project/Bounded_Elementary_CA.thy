@@ -1,12 +1,10 @@
-(*chapter \<open>Finite Cellular Automata\<close>*)
-
-(*reference damien's cylinders for those *)
+section \<open>Bounded Elementary Cellular Automata\<close>
 
 theory Bounded_Elementary_CA
   imports Finite_Elementary_CA_Base
 begin
 
-section \<open>Basic definitions of Finite Elementary Cellular Automata\<close>
+subsection \<open>Basic definitions of Finite Elementary Cellular Automata\<close>
 (* Going to go with left/right boundaries as Zero by default *)
 (* Might like that to be flexible somehow? Without ruining CA type def*)
 

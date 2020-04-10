@@ -1,3 +1,5 @@
+section \<open>Bounded 2D Cellular Automata Properties\<close>
+
 theory Bounded_TwoDim_CA_Properties
   imports Bounded_TwoDim_CA
 begin

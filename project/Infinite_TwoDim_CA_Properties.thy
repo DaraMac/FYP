@@ -1,3 +1,5 @@
+section \<open>Infinite 2D Cellular Automata Properties\<close>
+
 theory Infinite_TwoDim_CA_Properties
   imports Infinite_TwoDim_CA
 begin
@@ -50,7 +52,7 @@ definition lifeBlinker :: CA where
 
 value "State (run_t_steps lifeBlinker 0) (0) (0)"
 
-lemma "State (run_t_steps lifeBlinker n) 0 0 = One"
-apply(simp add: lifeBlinker_def)
+(*lemma "State (run_t_steps lifeBlinker n) 0 0 = One"
+apply(simp add: lifeBlinker_def)*)
   
 end

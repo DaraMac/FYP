@@ -1,0 +1,244 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Bounded{\isacharunderscore}Elementary{\isacharunderscore}CA{\isacharunderscore}Properties}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Bounded Elementary Cellular Automata Properties%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Bounded{\isacharunderscore}Elementary{\isacharunderscore}CA{\isacharunderscore}Properties\isanewline
+\ \ \isakeyword{imports}\ Bounded{\isacharunderscore}Elementary{\isacharunderscore}CA\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ stable\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}stable\ ca\ {\isasymequiv}\ State\ {\isacharparenleft}update{\isacharunderscore}CA\ ca{\isacharparenright}\ {\isacharequal}\ State\ ca{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ yields\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ state\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ {\isacharparenleft}\isakeyword{infixr}\ {\isacartoucheopen}yields{\isacartoucheclose}\ \ {\isadigit{6}}{\isadigit{5}}{\isacharparenright}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}A\ yields\ s\ {\isasymequiv}\ {\isacharparenleft}{\isasymexists}\ n{\isachardot}\ State\ {\isacharparenleft}run{\isacharunderscore}t{\isacharunderscore}steps\ A\ n{\isacharparenright}\ {\isacharequal}\ s\ {\isasymand}\ n\ {\isachargreater}\ {\isadigit{0}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ loops\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}loops\ ca\ {\isasymequiv}\ ca\ yields\ State\ ca{\isachardoublequoteclose}\isanewline
+\isanewline
+\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ garden{\isacharunderscore}of{\isacharunderscore}eden\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}garden{\isacharunderscore}of{\isacharunderscore}eden\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymnot}{\isacharparenleft}{\isasymexists}\ s{\isadigit{0}}{\isachardot}\ {\isacharparenleft}CA\ s{\isadigit{0}}\ r{\isacharparenright}\ yields\ s{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ reversible\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}reversible\ {\isacharparenleft}CA\ {\isacharunderscore}\ r{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isasymforall}s{\isachardot}\ {\isacharparenleft}{\isasymexists}{\isacharbang}s{\isadigit{0}}{\isachardot}\ State\ {\isacharparenleft}update{\isacharunderscore}CA\ {\isacharparenleft}CA\ s{\isadigit{0}}\ r{\isacharparenright}{\isacharparenright}\ {\isacharequal}\ s{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{theorem}\isamarkupfalse%
+\ {\isachardoublequoteopen}ca\ yields\ State\ {\isacharparenleft}run{\isacharunderscore}t{\isacharunderscore}steps\ ca\ {\isadigit{1}}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isacommand{proof}\isamarkupfalse%
+{\isacharminus}\isanewline
+\ \ \isacommand{show}\isamarkupfalse%
+\ {\isacharquery}thesis\ \isacommand{using}\isamarkupfalse%
+\ yields{\isacharunderscore}def\ \isacommand{by}\isamarkupfalse%
+\ blast\isanewline
+\isacommand{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{theorem}\isamarkupfalse%
+\ t{\isadigit{1}}\ {\isacharcolon}{\isachardoublequoteopen}n{\isachargreater}{\isadigit{0}}\ {\isasymLongrightarrow}\ ca\ yields\ State\ {\isacharparenleft}run{\isacharunderscore}t{\isacharunderscore}steps\ ca\ n{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}simp\ add{\isacharcolon}\ yields{\isacharunderscore}def{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}rule\ exI{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}rule\ conjI{\isacharparenright}\isanewline
+\ \ \isacommand{apply}\isamarkupfalse%
+{\isacharparenleft}auto{\isacharparenright}\isanewline
+\ \ \isacommand{done}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ orphan\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ rule\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}orphan\ s{\isadigit{0}}\ r\ {\isacharequal}\ {\isacharparenleft}{\isasymforall}\ sl\ sr{\isachardot}\ garden{\isacharunderscore}of{\isacharunderscore}eden\ {\isacharparenleft}CA\ {\isacharparenleft}\isanewline
+sl{\isacharat}s{\isadigit{0}}{\isacharat}sr{\isacharparenright}\ r{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isanewline
+\isanewline
+\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ class{\isadigit{1}}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}rule\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}class{\isadigit{1}}\ r\ {\isasymequiv}\ {\isacharparenleft}{\isasymexists}{\isacharbang}\ f{\isachardot}\ {\isacharparenleft}{\isasymforall}\ s{\isachardot}\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ yields\ f\ {\isasymand}\ uniform\ f\ {\isasymand}\ stable\ {\isacharparenleft}CA\ f\ r{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ class{\isadigit{2}}\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}rule\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}class{\isadigit{2}}\ r\ {\isasymequiv}\ {\isacharparenleft}{\isasymforall}\ s{\isachardot}\ {\isacharparenleft}{\isasymexists}\ f{\isachardot}\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ yields\ f\ {\isasymand}\ loops\ {\isacharparenleft}CA\ f\ r{\isacharparenright}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}class{\isadigit{1}}\ ca\ {\isasymLongrightarrow}\ class{\isadigit{2}}\ ca{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ class{\isadigit{1}}{\isacharunderscore}def\ class{\isadigit{2}}{\isacharunderscore}def\ loops{\isacharunderscore}def\ \isacommand{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/College/CS460-Final_Year_Project/project/Bounded_Elementary_CA_Properties.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%35=5%:%
+%:%38=6%:%
+%:%39=7%:%
+%:%40=7%:%
+%:%41=8%:%
+%:%42=9%:%
+%:%43=10%:%
+%:%44=10%:%
+%:%45=11%:%
+%:%46=12%:%
+%:%47=13%:%
+%:%48=13%:%
+%:%49=14%:%
+%:%50=15%:%
+%:%51=16%:%
+%:%52=17%:%
+%:%53=18%:%
+%:%54=18%:%
+%:%55=19%:%
+%:%56=20%:%
+%:%57=21%:%
+%:%58=21%:%
+%:%59=22%:%
+%:%60=23%:%
+%:%61=24%:%
+%:%62=24%:%
+%:%69=25%:%
+%:%70=25%:%
+%:%71=26%:%
+%:%72=26%:%
+%:%73=26%:%
+%:%74=26%:%
+%:%75=27%:%
+%:%81=27%:%
+%:%84=28%:%
+%:%85=29%:%
+%:%86=29%:%
+%:%89=30%:%
+%:%93=30%:%
+%:%94=30%:%
+%:%95=31%:%
+%:%96=31%:%
+%:%97=32%:%
+%:%98=32%:%
+%:%99=33%:%
+%:%100=33%:%
+%:%101=34%:%
+%:%107=34%:%
+%:%110=35%:%
+%:%111=36%:%
+%:%112=37%:%
+%:%113=37%:%
+%:%114=38%:%
+%:%115=39%:%
+%:%116=40%:%
+%:%117=41%:%
+%:%118=42%:%
+%:%119=43%:%
+%:%120=44%:%
+%:%121=45%:%
+%:%122=45%:%
+%:%123=46%:%
+%:%124=47%:%
+%:%125=48%:%
+%:%126=48%:%
+%:%127=49%:%
+%:%128=50%:%
+%:%129=51%:%
+%:%130=51%:%
+%:%133=52%:%
+%:%137=52%:%
+%:%138=52%:%
+%:%139=52%:%
+%:%144=52%:%
+%:%153=53%:%

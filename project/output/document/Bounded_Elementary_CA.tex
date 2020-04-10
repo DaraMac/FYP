@@ -1,0 +1,106 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Bounded{\isacharunderscore}Elementary{\isacharunderscore}CA}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Bounded Elementary Cellular Automata%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ Bounded{\isacharunderscore}Elementary{\isacharunderscore}CA\isanewline
+\ \ \isakeyword{imports}\ Finite{\isacharunderscore}Elementary{\isacharunderscore}CA{\isacharunderscore}Base\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Basic definitions of Finite Elementary Cellular Automata%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+\isacommand{fun}\isamarkupfalse%
+\ nbhds\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}state\ {\isasymRightarrow}\ neighbourhood\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}nbhds\ {\isacharbrackleft}{\isacharbrackright}\ {\isacharequal}\ {\isacharbrackleft}{\isacharbrackright}{\isachardoublequoteclose}\ {\isacharbar}\ \isanewline
+{\isachardoublequoteopen}nbhds\ {\isacharparenleft}x{\isacharhash}{\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}{\isacharparenleft}Nb\ Zero\ x\ Zero{\isacharparenright}{\isacharbrackright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+{\isachardoublequoteopen}nbhds\ {\isacharparenleft}x{\isacharhash}y{\isacharhash}{\isacharbrackleft}{\isacharbrackright}{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}{\isacharparenleft}Nb\ Zero\ x\ y{\isacharparenright}{\isacharcomma}\ {\isacharparenleft}Nb\ x\ y\ Zero{\isacharparenright}{\isacharbrackright}{\isachardoublequoteclose}\ {\isacharbar}\isanewline
+{\isachardoublequoteopen}nbhds\ {\isacharparenleft}x{\isacharhash}xs{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}{\isacharparenleft}Nb\ Zero\ x\ {\isacharparenleft}hd\ xs{\isacharparenright}{\isacharparenright}\ {\isacharhash}\ {\isacharparenleft}inner{\isacharunderscore}nbhds\ {\isacharparenleft}x{\isacharhash}xs{\isacharparenright}{\isacharparenright}{\isacharparenright}\ {\isacharat}\ {\isacharbrackleft}Nb\ {\isacharparenleft}last\ {\isacharparenleft}butlast\ xs{\isacharparenright}{\isacharparenright}\ {\isacharparenleft}last\ xs{\isacharparenright}\ Zero{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ update{\isacharunderscore}CA\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ CA{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}update{\isacharunderscore}CA\ {\isacharparenleft}CA\ s\ r{\isacharparenright}\ {\isacharequal}\ CA\ {\isacharparenleft}map\ r\ {\isacharparenleft}nbhds\ s{\isacharparenright}{\isacharparenright}\ r{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ run{\isacharunderscore}t{\isacharunderscore}steps\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}CA\ {\isasymRightarrow}\ nat\ {\isasymRightarrow}\ CA{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}run{\isacharunderscore}t{\isacharunderscore}steps\ ca\ n\ {\isacharequal}\ apply{\isacharunderscore}t{\isacharunderscore}times\ update{\isacharunderscore}CA\ ca\ n{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/College/CS460-Final_Year_Project/project/Bounded_Elementary_CA.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%44=7%:%
+%:%54=12%:%
+%:%55=12%:%
+%:%56=13%:%
+%:%57=14%:%
+%:%58=15%:%
+%:%59=16%:%
+%:%60=17%:%
+%:%61=18%:%
+%:%62=18%:%
+%:%63=19%:%
+%:%64=20%:%
+%:%65=21%:%
+%:%66=21%:%
+%:%67=22%:%
+%:%74=23%:%

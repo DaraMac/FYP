@@ -1,3 +1,5 @@
+section \<open>Infinite Elementary Cellular Automata\<close>
+
 theory Infinite_Elementary_CA
   imports Elementary_CA_Base
 begin

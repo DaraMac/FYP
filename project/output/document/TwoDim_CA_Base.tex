@@ -1,0 +1,166 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{TwoDim{\isacharunderscore}CA{\isacharunderscore}Base}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{2D Cellular Automata Base%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ TwoDim{\isacharunderscore}CA{\isacharunderscore}Base\isanewline
+\ \ \isakeyword{imports}\ CA{\isacharunderscore}Base\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isacommand{datatype}\isamarkupfalse%
+\ neighbourhood\ {\isacharequal}\ Nb\ {\isacharparenleft}NorthWest{\isacharcolon}cell{\isacharparenright}\ {\isacharparenleft}North{\isacharcolon}cell{\isacharparenright}\ {\isacharparenleft}NorthEast{\isacharcolon}cell{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}West{\isacharcolon}cell{\isacharparenright}\ \ \ \ \ \ {\isacharparenleft}Centre{\isacharcolon}cell{\isacharparenright}{\isacharparenleft}East{\isacharcolon}cell{\isacharparenright}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharparenleft}SouthWest{\isacharcolon}cell{\isacharparenright}\ {\isacharparenleft}South{\isacharcolon}cell{\isacharparenright}\ {\isacharparenleft}SouthEast{\isacharcolon}cell{\isacharparenright}\isanewline
+\isanewline
+\isacommand{type{\isacharunderscore}synonym}\isamarkupfalse%
+\ rule\ {\isacharequal}\ {\isachardoublequoteopen}neighbourhood\ {\isasymRightarrow}\ cell{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ apply{\isacharunderscore}nb\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}{\isacharparenleft}cell\ {\isasymRightarrow}\ cell{\isacharparenright}\ {\isasymRightarrow}\ neighbourhood\ {\isasymRightarrow}\ neighbourhood{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}apply{\isacharunderscore}nb\ f\ {\isacharparenleft}Nb\ nw\ n\ ne\ w\ c\ e\ sw\ s\ se{\isacharparenright}\ {\isacharequal}\ Nb\ {\isacharparenleft}f\ nw{\isacharparenright}\ {\isacharparenleft}f\ n{\isacharparenright}\ {\isacharparenleft}f\ ne{\isacharparenright}\ {\isacharparenleft}f\ w{\isacharparenright}\ {\isacharparenleft}f\ c{\isacharparenright}\ {\isacharparenleft}f\ e{\isacharparenright}\ {\isacharparenleft}f\ sw{\isacharparenright}\ {\isacharparenleft}f\ s{\isacharparenright}\ {\isacharparenleft}f\ se{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ nb{\isacharunderscore}to{\isacharunderscore}list\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}neighbourhood\ {\isasymRightarrow}\ cell\ list{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}nb{\isacharunderscore}to{\isacharunderscore}list\ {\isacharparenleft}Nb\ nw\ n\ ne\ w\ c\ e\ sw\ s\ se{\isacharparenright}\ {\isacharequal}\ {\isacharbrackleft}nw{\isacharcomma}\ n{\isacharcomma}\ ne{\isacharcomma}\ w{\isacharcomma}\ c{\isacharcomma}\ e{\isacharcomma}\ sw{\isacharcomma}\ s{\isacharcomma}\ se{\isacharbrackright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ list{\isacharunderscore}to{\isacharunderscore}nb\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}cell\ list\ {\isasymRightarrow}\ neighbourhood{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}list{\isacharunderscore}to{\isacharunderscore}nb\ {\isacharbrackleft}nw{\isacharcomma}\ n{\isacharcomma}\ ne{\isacharcomma}\ w{\isacharcomma}\ c{\isacharcomma}\ e{\isacharcomma}\ sw{\isacharcomma}\ s{\isacharcomma}\ se{\isacharbrackright}\ {\isacharequal}\ Nb\ nw\ n\ ne\ w\ c\ e\ sw\ s\ se{\isachardoublequoteclose}\isanewline
+\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ flip{\isacharunderscore}nb\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}neighbourhood\ {\isasymRightarrow}\ neighbourhood{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}flip{\isacharunderscore}nb\ nb\ {\isacharequal}\ apply{\isacharunderscore}nb\ flip\ nb{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ sum{\isacharunderscore}nb\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}neighbourhood\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}sum{\isacharunderscore}nb\ nb\ {\isacharequal}\ count{\isacharunderscore}list\ {\isacharparenleft}nb{\isacharunderscore}to{\isacharunderscore}list\ nb{\isacharparenright}\ One{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{fun}\isamarkupfalse%
+\ complement\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}rule\ {\isasymRightarrow}\ rule{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}complement\ r\ nb\ {\isacharequal}\ flip\ {\isacharparenleft}r\ {\isacharparenleft}flip{\isacharunderscore}nb\ nb{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{definition}\isamarkupfalse%
+\ totalistic\ {\isacharcolon}{\isacharcolon}\ {\isachardoublequoteopen}rule\ {\isasymRightarrow}\ bool{\isachardoublequoteclose}\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}totalistic\ r\ {\isasymequiv}\ {\isacharparenleft}{\isasymforall}\ nb{\isadigit{1}}\ nb{\isadigit{2}}{\isachardot}\ sum{\isacharunderscore}nb\ nb{\isadigit{1}}\ {\isacharequal}\ sum{\isacharunderscore}nb\ nb{\isadigit{2}}\ {\isasymlongrightarrow}\ {\isacharparenleft}r\ nb{\isadigit{1}}{\isacharparenright}\ {\isacharequal}\ {\isacharparenleft}r\ nb{\isadigit{2}}{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Game of life%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+\isacommand{definition}\isamarkupfalse%
+\ life\ {\isacharcolon}{\isacharcolon}\ rule\ \isakeyword{where}\isanewline
+{\isachardoublequoteopen}life\ ca\ {\isacharequal}\ {\isacharparenleft}case\ {\isacharparenleft}Centre\ ca{\isacharparenright}\ of\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ One\ \ \ {\isasymRightarrow}\ {\isacharparenleft}if\ {\isacharparenleft}sum{\isacharunderscore}nb\ ca{\isacharparenright}\ {\isacharequal}\ {\isadigit{3}}\ {\isasymor}\ {\isacharparenleft}sum{\isacharunderscore}nb\ ca{\isacharparenright}\ {\isacharequal}\ {\isadigit{4}}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ then\ One\ else\ Zero{\isacharparenright}\ {\isacharbar}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ Zero\ \ {\isasymRightarrow}\ {\isacharparenleft}if\ {\isacharparenleft}sum{\isacharunderscore}nb\ ca{\isacharparenright}\ {\isacharequal}\ {\isadigit{3}}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ then\ One\ else\ Zero{\isacharparenright}{\isacharparenright}{\isachardoublequoteclose}\isanewline
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/College/CS460-Final_Year_Project/project/TwoDim_CA_Base.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%35=5%:%
+%:%38=6%:%
+%:%39=7%:%
+%:%40=7%:%
+%:%41=8%:%
+%:%42=9%:%
+%:%43=10%:%
+%:%44=11%:%
+%:%45=11%:%
+%:%46=12%:%
+%:%47=13%:%
+%:%48=13%:%
+%:%49=14%:%
+%:%50=15%:%
+%:%51=16%:%
+%:%52=16%:%
+%:%53=17%:%
+%:%54=18%:%
+%:%55=19%:%
+%:%56=20%:%
+%:%57=20%:%
+%:%58=21%:%
+%:%59=22%:%
+%:%60=23%:%
+%:%61=24%:%
+%:%62=24%:%
+%:%63=25%:%
+%:%64=26%:%
+%:%65=27%:%
+%:%66=27%:%
+%:%67=28%:%
+%:%68=29%:%
+%:%69=30%:%
+%:%70=30%:%
+%:%71=31%:%
+%:%72=32%:%
+%:%73=33%:%
+%:%74=33%:%
+%:%75=34%:%
+%:%82=37%:%
+%:%92=40%:%
+%:%93=40%:%
+%:%94=41%:%
+%:%98=45%:%
+%:%105=46%:%

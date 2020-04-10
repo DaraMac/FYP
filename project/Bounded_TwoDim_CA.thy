@@ -1,3 +1,5 @@
+section \<open>Bounded 2D Cellular Automata\<close>
+
 theory Bounded_TwoDim_CA
   imports Finite_TwoDim_CA_Base
 begin
