@@ -1,13 +1,15 @@
-theory Toroidal_TwoDim_CA
+theory Bounded_TwoDim_CA
   imports Finite_TwoDim_CA_Base
 begin
 
+fun out_of_bounds :: "state \<Rightarrow> int \<Rightarrow> int \<Rightarrow> bool" where
+"out_of_bounds s x y = (if x \<ge> int_width s \<or> x < 0 \<or> y \<ge> int_height s \<or> y < 0 then True else False)"
+
 fun get_cell :: "state \<Rightarrow> int \<Rightarrow> int \<Rightarrow> cell" where
-"get_cell s x y = s!(nat x)!(nat y)"
+"get_cell s x y = (if out_of_bounds s x y then Zero else  s!(nat x)!(nat y))"
 
 fun get_nbhd :: "state \<Rightarrow> int \<Rightarrow> int \<Rightarrow> neighbourhood" where
-"get_nbhd s x y = (let w = int_width s in (let h = int_height s in
- list_to_nb [get_cell s ((x+i) mod w) ((y+j) mod h). j \<leftarrow> rev [-1..1], i \<leftarrow> [-1..1]]))"
+"get_nbhd s x y = list_to_nb [get_cell s (x+i) (y+j). j \<leftarrow> rev [-1..1], i \<leftarrow> [-1..1]]"
 
 fun nbhds :: "state \<Rightarrow> neighbourhood list list" where
 "nbhds s = (let h = (int_height s)-1 in (let w = (int_width s)-1 in

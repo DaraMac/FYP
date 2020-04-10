@@ -16,6 +16,12 @@ definition width :: "state \<Rightarrow> nat" where
 definition height :: "state \<Rightarrow> nat" where
 "height s = length (hd s)"
 
+definition int_width :: "state \<Rightarrow> int" where
+"int_width s \<equiv> int (width s)"
+
+definition int_height :: "state \<Rightarrow> int" where
+"int_height s \<equiv> int (height s)"
+
 definition widthCA :: "CA \<Rightarrow> nat" where
 "widthCA ca = width (State ca)"
 
@@ -32,10 +38,18 @@ definition uniform :: "state \<Rightarrow> bool" where
 definition oneCentre :: state where
 "oneCentre \<equiv> [[Zero, Zero, Zero], [Zero, One, Zero], [Zero, Zero, Zero]]"
 
-definition blinker :: state where
-"blinker \<equiv> [replicate 5 Zero,
+definition toroidalBlinker :: state where
+"blinker \<equiv>
+ [replicate 5 Zero,
  [Zero ,Zero, One, Zero, Zero],
  [Zero, Zero, One, Zero, Zero],
  [Zero, Zero, One, Zero, Zero],
  replicate 5 Zero]"
+
+definition boundedBlinker :: state where
+"boundedBlinker \<equiv> [
+                    [Zero, One, Zero],
+                    [Zero, One, Zero],
+                    [Zero, One, Zero]
+                   ]"
 end
