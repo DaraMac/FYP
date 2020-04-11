@@ -5,6 +5,7 @@
 *.blg
 *.docx
 *.docx#
+*.listing
 *.lof
 *.log
 *.lol
@@ -15,6 +16,7 @@
 *.swp
 *.toc
 
+FYP Submission Instructions.pdf
 Final_Year_Project_Handbook.pdf
 Isabelle2019
 dheeraj*

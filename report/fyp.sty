@@ -212,7 +212,7 @@
   ]{myminted}[2]
   {%
   listing engine=minted,
-  minted language=python,
+  minted language=isabelle,
   listing only,
   blend before title=colon,
   breakable,
@@ -221,7 +221,7 @@
       linenos,
       breaklines=true,
       breakbefore=.,
-      fontsize=\customfontsize,
+      %fontsize=\customfontsize,
       numbersep=2mm
       , autogobble
       , mathescape=true
@@ -293,14 +293,15 @@
   , overlay={
       \begin{tcbclipinterior}
         \fill[hackage] (frame.south west)
-        rectangle node[] {\centering\includegraphics[width=3.5mm]{python-logo.png}}
+        rectangle node[] {\centering\includegraphics[width=5.3mm]{isabelle.pdf}}
         ([xshift=4mm]frame.north west);
       \end{tcbclipinterior}
     }
   }
 
 \newcommand{\hackage}[1]{\hackagebox{\href{https://pypi.org/project/#1}{\color{hackage!25!black}{#1}}}}
-\newcommand{\docs}[1]{\hackagebox{\href{https://docs.python.org/3/library/#1}{\color{hackage!25!black}{#1}}}}
+\newcommand{\docs}[1]{\hackagebox{\href{https://isabelle.in.tum.de/}{\color{hackage!25!black}{#1}}}}
+\newcommand{\isabelle}[0]{\hackagebox{\href{https://isabelle.in.tum.de/}{\color{hackage!25!black}Isabelle}}}
 
 \newcommand{\codeinlinenormal}[1]{\mintinline[fontsize=\footnotesize]{text}{#1}}
 \newcommand{\codeinline}[1]{\mintinline[fontsize=\footnotesize]{text}{#1}}
