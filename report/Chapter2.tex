@@ -133,7 +133,7 @@ For instance part of the definition of Rule 110 is given in \Cref{table:rule110}
 
 \subsection{Isabelle}
 
-Isabelle as proof assistant allows us to do define algebraic datatypes and pure total recursive functions,
+Isabelle as a proof assistant allows us to to define algebraic datatypes and pure total recursive functions,
 using pattern matching, guards, and conditionals in a syntax very similar to Haskell's.
 Function types are represented in the usual currying friendly way for multiple arguments.
 For instance see \Cref{code:example_fun} below.
@@ -166,3 +166,7 @@ Strictly speaking everything in quotation marks is part of HOL,
 the logic that Isabelle runs on by default,
 and the language most of the actual programming happens in.
 However for the sake of simplicity throughout this report the whole language and infrastructure shall simply be referred to as``Isabelle''.
+Each file in Isabelle is referred to as a \mintinline{isabelle}{theory},
+and is a selection of definitions and proofs.
+These theories may draw in and reference other predefined or user made theory files as dependencies, in the same way as any programming language uses libraries.
+

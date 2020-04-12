@@ -1,11 +1,22 @@
 \chapter{The Problem}
 
-The goal of the project was to somehow implement a variety of types of CA in Isabelle in a workable fashion.
-The types of CA were one or two dimensional CA that were either finite or infinite,
-leading to essentially 4 main categories to develop.
-There were two main issues to address for each of these.
-
 \section{Problem Analysis}
 
-There were a lot of issues to address in in this process.
-The state
+The goal of the project was to somehow implement a variety of types of CA in Isabelle in a workable fashion.
+The types of CA were one or two dimensional CA that were either finite or infinite,
+leading to essentially four main categories to develop.
+There were two main issues to address for each of these.
+
+The first was how to implicitly or explicitly represent the state of a CA.
+This question was especially key in the infinite case, 
+as it requires thinking beyond traditional finite data structures.
+The other topic of interest was how to develop the state of the CA as time progresses.
+Again this is much more a difficult and important issue in the infinite case,
+as you cannot simply apply a function over infinitely many values.
+This rules out the obvious choices such as using \mintinline{isabelle}{map} and other functions in a similar vein.
+
+The finite automata also had certain issues that do not occur in the infinite cases.
+As they are finite they have boundaries,
+and for cells on these boundaries the neighbourhood necessary to determine its evolution does not exist in the standard way.
+This requires a decision to be made to either adjust the neighbourhood of these cells,
+or the rule that applies to them.
