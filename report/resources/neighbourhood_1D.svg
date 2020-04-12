@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg1066"
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="neighbourhood_1D.svg">
+  <defs
+     id="defs1060" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="541.21462"
+     inkscape:cy="467.84681"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="704"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata1063">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g2657"
+       inkscape:label="Grid_Polar:X1:Y1"
+       transform="translate(136.874490768,171.899589273)">
+      <g
+         id="g2641"
+         inkscape:label="MajorXGridlines" />
+      <g
+         id="g2643"
+         inkscape:label="MajorYGridlines" />
+      <g
+         id="g2653"
+         inkscape:label="SubMinorXGridlines">
+        <path
+           id="path2645"
+           inkscape:label="SubminorXDiv0:0:1"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 2.64583333328,0 L 2.64583333328,2.64583333328" />
+        <path
+           id="path2647"
+           inkscape:label="SubminorXDiv0:0:2"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 5.29166666656,0 L 5.29166666656,2.64583333328" />
+        <path
+           id="path2649"
+           inkscape:label="SubminorXDiv0:0:3"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 7.93749999984,0 L 7.93749999984,2.64583333328" />
+        <path
+           id="path2651"
+           inkscape:label="SubminorXDiv0:0:4"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 10.5833333331,0 L 10.5833333331,2.64583333328" />
+      </g>
+      <rect
+         id="rect2655"
+         inkscape:label="Border"
+         y="0"
+         x="0"
+         width="13.2291666664"
+         style="stroke:#000000;stroke-width:0.264583333328;fill:none"
+         height="2.64583333328" />
+    </g>
+    <g
+       id="g2698"
+       inkscape:label="Grid_Polar:X1:Y1"
+       transform="translate(136.874490768,171.899589273)">
+      <g
+         id="g2682"
+         inkscape:label="MajorXGridlines" />
+      <g
+         id="g2684"
+         inkscape:label="MajorYGridlines" />
+      <g
+         id="g2694"
+         inkscape:label="SubMinorXGridlines">
+        <path
+           id="path2686"
+           inkscape:label="SubminorXDiv0:0:1"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 2.64583333328,0 L 2.64583333328,2.64583333328" />
+        <path
+           id="path2688"
+           inkscape:label="SubminorXDiv0:0:2"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 5.29166666656,0 L 5.29166666656,2.64583333328" />
+        <path
+           id="path2690"
+           inkscape:label="SubminorXDiv0:0:3"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 7.93749999984,0 L 7.93749999984,2.64583333328" />
+        <path
+           id="path2692"
+           inkscape:label="SubminorXDiv0:0:4"
+           style="stroke:#000000;stroke-width:0.0793750031525;fill:none"
+           d="M 10.5833333331,0 L 10.5833333331,2.64583333328" />
+      </g>
+      <rect
+         id="rect2696"
+         inkscape:label="Border"
+         y="0"
+         x="0"
+         width="13.2291666664"
+         style="stroke:#000000;stroke-width:0.264583333328;fill:none"
+         height="2.64583333328" />
+    </g>
+    <path
+       style="opacity:0.98000004;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.85120404;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
+       d="m 537.52007,654.71734 v -4.48255 h 4.79822 4.79823 v 4.48255 4.48255 h -4.79823 -4.79822 z"
+       id="path2711"
+       inkscape:connector-curvature="0"
+       transform="scale(0.26458333)" />
+    <path
+       style="opacity:0.98000004;fill:#ff1414;fill-opacity:1;stroke:#000000;stroke-width:1.85120404;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
+       d="m 527.54481,654.71734 v -4.48255 h 4.79823 4.79822 v 4.48255 4.48255 h -4.79822 -4.79823 z"
+       id="path2713"
+       inkscape:connector-curvature="0"
+       transform="scale(0.26458333)" />
+    <path
+       style="opacity:0.98000004;fill:#ff1414;fill-opacity:1;stroke:#000000;stroke-width:1.85120404;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
+       d="m 547.49533,654.71734 v -4.48255 h 4.79822 4.79822 v 4.48255 4.48255 h -4.79822 -4.79822 z"
+       id="path2715"
+       inkscape:connector-curvature="0"
+       transform="scale(0.26458333)" />
+    <path
+       style="opacity:0.98000004;fill:#1414ff;fill-opacity:1;stroke:#000000;stroke-width:1.30899894;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
+       d="m 537.53943,654.70538 v -4.46429 h 4.77678 4.77679 v 4.46429 4.46428 h -4.77679 -4.77678 z"
+       id="path2717"
+       inkscape:connector-curvature="0"
+       transform="scale(0.26458333)" />
+  </g>
+</svg>
