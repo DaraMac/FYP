@@ -1,0 +1,46 @@
+\chapter{Technical Background}
+
+\section{Topic Material}
+
+\subsection{Formalisations in Computability Theory}
+
+As mentioned before,
+this is certainly not the first formalisation of computability theory concepts inside of proof assistants.
+Other works however have focused on more traditional models or with certain specific proofs in mind.
+These include $\lambda$-calculus in Coq \cite{forster},
+partial recursive functions in Lean \cite{carneiro},
+and the aforementioned Turing and Abacus machines in Isabelle \cite{urban}.
+Other than choices of model and language,
+the key difference between those works and this project is the end goal.
+The three mentioned above all set about to formalise computability theory from the perspective of their chosen model or models.
+This project works with just Cellular Automata and what results can be specifically shown about them.
+
+Additionally the approach in \cite{urban} often involves specifying certain exact indices in lists and having to manipulate these numbers.
+This obviously has its technical benefits and is necessary when working with TMs,
+but the desire in this work was to take a ``wholemeal'' functional programming approach to the construction where possible.
+
+The existing research that comes closest to both the goals and execution of this project,
+is a formalisation of CA in Coq for the purposes of verifying a result about the firing squad problem \cite{firing}.
+Their work bases the CA over the naturals $\mathbb{N}$,
+and includes an explicit time parameter.
+As well as that,
+their transition function is based more around individual cells,
+and the properties they define are all based around eventually deriving the proof.
+This project certainly has similarities,
+but trades the depth of \cite{firing} for breadth,
+and makes use of definitions that try to be more compact.
+For instance the time parameter is more external to the cellular automata, and the varieties of different CA are defined with different mechanisms.
+
+
+\subsection{Cellular Automata}
+The concept of CA has been around since the 1940s and were popularised in the 70s with Conway's Game of Life.
+However a lot of the names and terminology associated with them comes from Stephen Wolfram \cite{wolfram}.
+His work is not entirely formal,
+but others have provided their own formalisations of definitions he put forward \cite{yu}.
+This was especially useful as an aid in translating the some of the classifications of CA into Isabelle, 
+even if their formalisation differed in many other ways.
+
+
+\section{Technical Material}
+
+\subsection{Cellular Automata}
