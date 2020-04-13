@@ -1,1 +1,40 @@
 \chapter{Evaluation}
+
+\section{Correctness on a Software Level}
+
+As mentioned in \Cref{sec:metrics} trying to quantitatively evaluate a mathematical statement or definition is not an easy task.
+The most crude method but also the most essential is to check whether the results from it match up with the expected results.
+As there is not another convenient, computerised, and provably correct formalisation of Cellular Automata,
+some of this must be done by hand.
+To this end all the CA types were instantiated on a variety of simple example programs, 
+and the results after different numbers of iterations checked against robust pre-existing simulators.
+Although there were some issues, 
+all current CA passed these tests.
+As CA are very simple models,
+testing a certain number of base and edge cases gives enough information for extrapolation.
+
+
+\section{Analysis of Models}
+However all this shows is that these programs achieve the goal of modeling CA.
+These tests do not answer the much more important and nuanced question of whether they do this well.
+
+One mark in favour of this is that it was possible to quite succinctly define properties the CA models should have,
+and to relatively easily prove that certain example CA like Rule 110 did or did not have these properties.
+
+One issue there is there was a lot of code duplication.
+In the absence of any grand unifying model or typeclass for all CA,
+properties often had to be restated with no changes in multiple different files.
+This is an inefficient method that would not be very scalable if this were a longer term project.
+
+The CA models themselves,
+with the exception of the two dimensional finite ones,
+are short and for the most part intuitively clear in their aims.
+The type keeps things to the bare essentials,
+and introduction of structures like neighbourhoods means the whole action of a CA is produced from the composition of a few, very simple functions.
+This is certainly a success in terms of what was hoped for at the start of the project.
+
+In this regard the best models are the elementary infinite CA
+and both the finite elementary CA due to the simplicity of their implementations.
+Unlike those, the two dimensional infinite CA has a lot of baggage when it is required to manually deal with all nine cells in a neighbourhood.
+The definitions of two dimensional finite CA certainly match up the least with the informal description.
+From reading their implementations their purpose is not as immediately obvious as with the others.
