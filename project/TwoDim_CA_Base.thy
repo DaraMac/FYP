@@ -27,23 +27,36 @@ fun flip_nb :: "neighbourhood \<Rightarrow> neighbourhood" where
 fun sum_nb :: "neighbourhood \<Rightarrow> nat" where
 "sum_nb nb = count_list (nb_to_list nb) One"
 
+definition outer_sum :: "neighbourhood \<Rightarrow> nat" where
+"outer_sum nb = (case Centre nb of Zero \<Rightarrow> sum_nb nb |
+                                   One \<Rightarrow> (sum_nb nb) - 1)"
+
+lemma [simp] :"Centre nb = Zero \<Longrightarrow> outer_sum nb = sum_nb nb"
+apply auto
+using outer_sum_def by auto
+
 fun complement :: "rule \<Rightarrow> rule" where
 "complement r nb = flip (r (flip_nb nb))"
 
 definition totalistic :: "rule \<Rightarrow> bool" where
 "totalistic r \<equiv> (\<forall> nb1 nb2. sum_nb nb1 = sum_nb nb2 \<longrightarrow> (r nb1) = (r nb2))"
 
+definition outer_totalistic :: "rule \<Rightarrow> bool" where
+"outer_totalistic r \<equiv> (\<forall> nb1 nb2. ((Centre nb1 = Centre nb2) \<and> (outer_sum nb1 = outer_sum nb2)) \<longrightarrow> (r nb1) = (r nb2))"
 
 subsection \<open>Game of life \<close>
 
 (* For One case we have 3 or 4 as we also count the cell in the middle *)
 definition life :: rule where
-"life ca = (case (Centre ca) of
-            One   \<Rightarrow> (if (sum_nb ca) = 3 \<or> (sum_nb ca) = 4
+"life nb = (case (Centre nb) of
+            One   \<Rightarrow> (if (outer_sum nb) = 2 \<or> (outer_sum nb) = 3
                       then One else Zero) |
-            Zero  \<Rightarrow> (if (sum_nb ca) = 3
+            Zero  \<Rightarrow> (if (outer_sum nb) = 3
                       then One else Zero))"
 
-theorem "totalistic life"
-
+(* line balance *)
+theorem "outer_totalistic life"
+apply(simp add: outer_totalistic_def)
+apply auto
+apply(simp add: life_def)
 end
