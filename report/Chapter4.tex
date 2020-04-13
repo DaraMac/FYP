@@ -1,9 +1,5 @@
 \chapter{The Solution}
 
-The purpose of this chapter is to clearly identify, discuss, and justify the decisions you make
-Depending on your type of project, you may not need to include all of these:
-
-
 \section{Architectural Level}
 
 \begin{figure}[h]
@@ -19,8 +15,8 @@ with files further down the tree depending on those above.
 all the rest are new theories created for the project.
 
 From the simplest core definitions given in \mintinline{isabelle}{CA_Base},
-the project essentially splits into two due to the differences in implementing one dimensional versus two dimensional CA.
-However the internal structure of these two subtrees are exactly the same apart from the distinction in dimension.
+the project splits into two due to the differences in implementing one dimensional versus two dimensional CA.
+However the internal structure of these two subtrees is exactly the same apart from the distinction in dimension.
 They both contain a base file for the two kinds of finite CA,
 and another file dealing with the infinite case.
 
@@ -29,18 +25,18 @@ They very roughly increase in power and complexity from left to right.
 
 \section{The Cellular Automata Type}
 
-The type of \mintinline{isabelle}{Cellular Automata} is redefined for each of the four main branches in the project.
+The type of \mintinline{isabelle}{Cellular Automata} is redefined for each of the four main branches.
 Those are elementary finite,
 two-dimensional finite,
 elementary infinite,
 and two-dimensional infinite.
 This is due to the geometric and functional differences that have to exist in the \mintinline{isabelle}{state} type parameter underlying each broad class of CA.
 Despite this, the actual signature of the type remains unchanged for each.
-This is the allow the definitions and proofs that sit on top of them to make the same assumptions about type structure and composition.
+This is to allow the definitions and proofs that sit on top of them to make the same assumptions about type structure and composition.
 As shown below in \Cref{code:ca_def} the definition is very compact and simple.
 All CA also share the binary cell type given in \Cref{code:cell_def}.
 
-As you would hope,
+As one might expect,
 a Cellular Automata consists only of the current global state it is in,
 and the rule necessary to transition it to the next state.
 This however does hide quite a lot of complexity,
@@ -53,7 +49,7 @@ $S$ the set of states,
 $N$ the neighbourhood,
 and $f$ the local rule.
 This is certainly more transparent then the definition given here.
-In this project's version the information about neighbourhoods is given implicitly from a neighbourhood function that sits in the local context where we want to actually run the CA.
+In this project's version the information about neighbourhoods is given implicitly from a neighbourhood function that sits in the local context where the CA is actually run.
 The reason for the approach taken here is for elegance and ease of use in further results on the CA type.
 Adding more information to the type directly can mean more work in pattern matching,
 and constructing and deconstructing the type every time it is used.
@@ -72,7 +68,7 @@ and similar for \mintinline{isabelle}{Rule}.
 
 It is also worth noting that the CA here is not directly defined as a tuple.
 Using a unique datatype carries more semantic weight then giving a \mintinline{isabelle}{type_synonym} to a tuple.
-The same concept does not exist in general mathematics so purely mathematical approaches to formalisms usually just involve a tuple.
+The same concept does not exist in general mathematics so purely mathematical approaches to formalisms involve a tuple.
 
 \subsection{State}
 
@@ -108,11 +104,11 @@ As shown in \Cref{code:nb_def} the only practical difference is adding more \min
     (SouthWest:cell) (South:cell)  (SouthEast:cell)
 \end{myminted}
 
-This approach of generating neighbourhoods as an entity distinct from mere cells allowed a higher level approach to dealing with CA.
+This approach of generating neighbourhoods as an entity distinct from cells allowed a higher level approach to dealing with CA.
 It meant that in the finite elementary CA,
 the question of updating cells is solved by simply mapping a \mintinline{isabelle}{rule} over the neighbourhoods,
 see \Cref{code:update_nbhd}.
-By abstracting out a neighbourhood function it also also for minor tweaks to that to entirely change the topology of a finite CA,
+By abstracting out a neighbourhood function it also allows for minor tweaks that entirely change the topology of a finite CA,
 as explained in \Cref{sec:finite_CA}.
 
 
@@ -127,14 +123,15 @@ as explained in \Cref{sec:finite_CA}.
 \end{myminted}
 
 In the two dimensional finite case,
-as state is just a list of lists of cells,
+as the state of a CA is just a list of lists of cells,
 it requires a mapping of maps over those but the general principle is similar.
 
 A CA can be run for multiple steps through repeated application of \inline{update_CA} through another function designed for this.
 
+
 \section{Finite Cellular Automata} \label{sec:finite_CA}
 
-There ended up being two separate paths taken in dealing with the cells on the boundary of the finite CA.
+There were two separate paths taken in dealing with cells on the boundary of the finite CA.
 The first,
 which for the purposes of the project is named \emph{bounded},
 is the simplest conceptually,
@@ -159,7 +156,7 @@ to include those cells that should be next to it if it were in a toroidal shape.
 
 In the one dimensional case this is very easy to implement.
 All that has to be done is stick the additional cells onto the state list,
-and call another function \mintinline{isabelle}{inner_nbhds} that does the obvious action of stepping through the internal items in a list,
+and call another function \mintinline{isabelle}{inner_nbhds} which performs the obvious action of stepping through the internal items in a list,
 returning the neighbourhoods for each.
 
 \begin{myminted}{Finite one dimensional neighbourhood generation}{finite_1D_nb}
@@ -233,24 +230,24 @@ and \mintinline{isabelle}{get_cell}.
 Note how the \mintinline{isabelle}{get_nbhd} function does the work to create a torus by wrapping indices around with \mintinline{isabelle}{mod},
 while in the bounded case \mintinline{isabelle}{get_cell} is responsible for filling in the \mintinline{isabelle}{Zero}s.
 
-For the toroidal CA, \inline{get_cell} just does not default to returning \inline{Zero},
+For the toroidal CA, \inline{get_cell} does not default to returning \inline{Zero},
 and for bounded CA,
 \inline{get_nbhd} does not use any modular wrapping.
 
 To understand the indexing used in the two dimensional state,
-the inner lists have to be though of as column vectors moving vertically. % TODO phrase better?
+the inner lists have to be thought of as column vectors moving vertically. % TODO phrase better?
 
 
 \section{Infinite Cellular Automata}
 
-Infinite CA are actually simpler because they have no boundaries so there was no need for the all the edge case handling that characterised finite CA.
+Infinite CA are simpler because they have no boundaries meaning there was no need for the all the edge case handling that characterised finite CA.
 However they require discarding conventional data structures like lists,
 for an approach much more grounded in mathematics and functional programming.
 
 
 \subsection{Neighbourhoods}
 
-The neighbourhood does not play quite as big a part in the infinite,
+The neighbourhood does not play quite as big a part in the infinite CA,
 especially since there were no variations made of the topology.
 However it was still used in the interest of consistency in level of abstraction and definition,
 and to allow for potential future uses of it.
@@ -259,7 +256,7 @@ This allowed the type signature of \inline{rule} to remain unchanged too.
 
 \subsection{State}
 
-In the end infinite state,
+State in infinite CA,
 and extending it,
 turned out to be much simpler than the finite case.
 One dimensional state simply needs to pair every integer with a cell,
@@ -270,8 +267,8 @@ there is no need for a partial function or something of that kind.
 Two dimensional state is extended easily from the base case,
 although strictly speaking it is not modelled as a function from the Cartesian product of the integers,
 but just as a function with two integer arguments.
-These two are of course isomorphic,
-but multiple arguments is more easily extensible,
+These two are isomorphic,
+but multiple arguments are more easily extensible,
 and allows for partial application and currying.
 
 \begin{myminted}{Infinite state represented as functions}{state_infinite}
@@ -320,7 +317,7 @@ were much smaller than the differences in the finite case.
 Due to the way CA and their constituent components were built with the same type signatures,
 most properties built on them could hold with mostly trivial adjustments for the CA type.
 Additionally a lot of common properties about CA, 
-when phrased in the language to describe CA develop here,
+when phrased in the language to describe CA developed here,
 are actually properties about the rule making up a CA.
 These abstractions enabled some properties to apply with no adjustments to all CA types.
 
@@ -346,7 +343,7 @@ Note the \inline{ALL} is simply an ASCII stand in for the $\forall$ quantifier.
 
 
 As well as properties about CA types in general,
-two specific rules of CA of interest were defined with some properties proven specifically about them.
+two specific rules of interest were defined with some properties proven about them.
 These were Rule 110 for one dimensional CA and Conway's Game of Life for two dimensions.
 
 \subsection{Rule 110}
@@ -362,7 +359,7 @@ by (metis amphichiral_def cell.distinct(1) mirror.simps r110.simps(4) r110.simps
 This lemma does not have as nice as proof as that in \Cref{code:life_total}.
 This is because it is a computer generated proof,
 found via use of \inline{sledgehammer}.
-A lot of proofs in this project were found via computer search,
+Many proofs proofs in this project were found via computer search,
 a hallmark of this is a proof being very short but not very human readable.
 
 \subsection{Game of Life}

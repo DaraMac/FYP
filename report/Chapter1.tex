@@ -1,16 +1,17 @@
 \chapter{Introduction}
 % TODO references for these
 Cellular Automata (CA) are a very simple model of computation.
-There are many variations and extensions of them,
+Many variations and extensions exist,
 and some like Conway's Game of Life and Rule 110 are known to be Turing Complete.
 Isabelle is a proof assistant that can be used for anything from mathematical proofs to formal verification of software properties.
 
 
 \section{Topic addressed in this project}
 
-This project looks at formalising models of Cellular Automaton in Isabelle to help deal with the complexity that comes with trying to mathematically prove results about them.
+This project looks at formalising models of Cellular Automaton in Isabelle to help deal with the complexity that comes with trying to mathematically prove results.
 In addition to providing a formalisation of six different variants of CA,
 this project provides definitions of important properties they may have, and proves some lemmas and theorems necessary to work with them.
+It attempts all this while also trying to stay within the boundaries of a five credit project.
 
 
 \section{Motivation}
@@ -23,7 +24,7 @@ being very strict and formal in these can prove difficult.
 
 However the Turing Machine is not the only available model in CS.
 One of the goals of this project was to look at \emph{alternative} concepts that achieve the same thing,
-to help better appreciate the benefits and drawbacks.
+to help better appreciate the benefits and drawbacks of each model.
 Cellular Automata were chosen as they strike a good balance between simplicity and complexity,
 as they have a very simple idea, 
 but come with additional geometric aspects to consider.
@@ -34,7 +35,7 @@ comes from a desire to use the exactness of computers to cope with issues that s
 
 \section{Approach}
 
-\docs{Isabelle} was chosen as the language and framework to implement these models in.
+\docs{Isabelle} was chosen as the language and framework to implement these models.
 This is due to it being very high level,
 and having advanced tools available to ease the creation process.
 These include the multitool command \mintinline{isabelle}{sledgehammer} which invokes several Automatic Theorem Provers and Satisfiability-Modulo-Theories solvers, and \mintinline{isabelle}{nitpick} which provides counter-examples to statements.
@@ -47,11 +48,11 @@ Isabelle also has a powerful and expressive type system,
 and the decision was taken to directly make use of this in the CA definitions created.
 This involved making each kind of CA explicitly into a type,
 to make use of automatic type checking and other benefits.
-This contrasts with a more mechanical approach taken in a paper \cite{urban} that also works on implementing Turing Machines and other computability concepts in Isabelle.
-One reason for this difference in approach is their work involves the need to convert between different models, for instance Abacus Machine to Turing Machine,
+This contrasts with the more mechanical approach taken in a paper \cite{urban} that also works on implementing Turing Machines and other computability concepts in Isabelle.
+One reason for this difference in approach is that their work involves the need to convert between different models, for instance Abacus Machine to Turing Machine,
 whereas in this project no conversions are done.
 Additionally the design of such ``machines'' lend themselves to being built in such a way.
-However it was not possible to entirely avoid that way of thinking with CA either, in particular in the two dimensional case.
+However it was not possible to entirely avoid that way of thinking with CA either, particularly in the two dimensional case.
 
 
 \section{Metrics} \label{sec:metrics}
@@ -65,8 +66,8 @@ As such the definitions written here were evaluated in two main ways:
         If so then it is capturing the same spirit as the original,
         even if the means of execution may differ slightly or significantly.
     \item Functionality: As CA are systems that can be run,
-        it is necessary to run them on example programs and see the correct results are achieved.
-        Speed is not a trait that is sought out but accuracy is of course essential.
+        it is necessary to run them on example programs to see that the correct results are achieved.
+        Speed is not a trait that is sought but accuracy is of course essential.
 \end{enumerate}
 
 Also taken into account is the ability to state properties of these systems,

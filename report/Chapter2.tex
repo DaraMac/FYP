@@ -69,7 +69,7 @@ consisting only of a trio of cells including the cell itself in the middle, and 
 \end{figure}
 
 In two dimensions there are more possible neighbourhoods that still seem natural.
-The one used here is known as the \emph{Moore neighbourhood},
+The one used \Cref{fig:moore} is known as the \emph{Moore neighbourhood},
 made up of the nine cells that form a square including the cell itself as the centre.
 Alternatives include the \emph{von Neumann neighbourhood},
 which only takes the squares in the cardinal directions from the centre.
@@ -82,11 +82,10 @@ which only takes the squares in the cardinal directions from the centre.
     \label{fig:moore}
 \end{figure}
 
-When showing the development of a one dimensional CA over time,
-it is best represented by multiple rows of cells, 
+The development of a one dimensional CA over time is best represented by multiple rows of cells,
 with each new row representing the state at the next time step,
-and with time increasing downwards along the y-axis.
-It's important to remember that the whole structure depicted never exists at any point in time,
+with time increasing downwards along the y-axis.
+It is important to remember that the whole structure depicted never exists at any point in time,
 only the one dimensional slices across.
 
 \begin{figure}[h]
@@ -96,7 +95,7 @@ only the one dimensional slices across.
     \label{fig:rule26}
 \end{figure}
 
-A two dimensional CA is of course visually shown as a cell diagram in the plane,
+A two dimensional CA is shown as a cell diagram in the plane,
 with changes over time indicated via multiple diagrams adjacent to each other
 and time flowing forward from left to right.
 
@@ -144,7 +143,7 @@ For instance see \Cref{code:example_fun} below.
 
 On top of these we can state and prove theorems using all the usual first order logic connectives, quantifiers and operators,
 along with some Isabelle specifics.
-There are multiple different ways of writing proofs in Isabelle,
+There are multiple ways of writing proofs in Isabelle,
 with some being written in the more human-readable Isar language
 and others simply being a chain of commands to apply.
 Both kinds will be made use of in the project.
@@ -160,9 +159,8 @@ Both kinds will be made use of in the project.
 
 Strictly speaking everything in quotation marks is part of HOL,
 the logic that Isabelle runs on by default,
-and the language most of the actual programming happens in.
-However for the sake of simplicity throughout this report the whole language and infrastructure shall simply be referred to as``Isabelle''.
+and the language in which most of the actual programming happens.
+However for the sake of simplicity throughout this report the whole language and infrastructure shall simply be referred to as ``Isabelle''.
 Each file in Isabelle is referred to as a \mintinline{isabelle}{theory},
 and is a selection of definitions and proofs.
-These theories may draw in and reference other predefined or user made theory files as dependencies, in the same way as any programming language uses libraries.
-
+These theories may draw in and reference other predefined or user made theory files as dependencies in the same way as any programming language uses libraries.
