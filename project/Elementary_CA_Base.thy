@@ -85,7 +85,6 @@ fun r110 :: rule where
 "r110  (Nb Zero Zero Zero) = Zero"
 
 lemma "\<not>amphichiral r110"
-apply auto
 by (metis amphichiral_def cell.distinct(1) mirror.simps r110.simps(4) r110.simps(7))
 
 lemma "\<not>totalistic r110"

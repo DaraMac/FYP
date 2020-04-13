@@ -324,13 +324,15 @@ when phrased in the language to describe CA develop here,
 are actually properties about the rule making up a CA.
 These abstractions enabled some properties to apply with no adjustments to all CA types.
 
-In total about fifteen distinct properties of CA were defined,
+In total about sixteen distinct properties of CA were defined,
 some totally generic,
 others,
 like those in \Cref{code:props_1D},
 are specific to the structural constraints of one dimension.
 This number also does not include utility functions necessary to get the CA to work,
 along with ancillary lemmas proved about these for basic simplification properties.
+Additionally for each of these properties,
+they were related to either another property or a concrete CA via theorems and lemmas.
 
 \begin{myminted}{One dimensional structure properties}{props_1D}
     fun mirror :: "rule => rule" where
@@ -340,7 +342,7 @@ along with ancillary lemmas proved about these for basic simplification properti
     "amphichiral r ≡ (ALL c. r c = (mirror r) c)"
 \end{myminted}
 
-Note the \inline{ALL} is simply an ASCII stand for the $\forall$ quantifier.
+Note the \inline{ALL} is simply an ASCII stand in for the $\forall$ quantifier.
 
 
 As well as properties about CA types in general,
@@ -348,17 +350,36 @@ two specific rules of CA of interest were defined with some properties proven sp
 These were Rule 110 for one dimensional CA and Conway's Game of Life for two dimensions.
 
 \subsection{Rule 110}
-Rule 110 is an interesting example as it has been proved to be Turing Complete
+Rule 110 is an interesting example as it has been proven Turing Complete.
+Some negative results were proved about it,
+for instance it can be shown that it does not fit the definition of amphichiral from \Cref{code:props_1D}.
+
+\begin{myminted}{Negative result on Rule 110}{r110_neg}
+    lemma "¬amphichiral r110"
+by (metis amphichiral_def cell.distinct(1) mirror.simps r110.simps(4) r110.simps(7))
+\end{myminted}
+
+This lemma does not have as nice as proof as that in \Cref{code:life_total}.
+This is because it is a computer generated proof,
+found via use of \inline{sledgehammer}.
+A lot of proofs in this project were found via computer search,
+a hallmark of this is a proof being very short but not very human readable.
 
 \subsection{Game of Life}
 The Game of Life is a two dimensional CA popularised by John Conway and Martin Gardener.
+Like Rule 110 it is also Turing Complete.
 One key aspect of Life,
-is that is it \emph{totalistic},
-meaning a cell changes depending only on the total number of \inline{One} cells in its neighbourhood.
+is that is it \emph{outer totalistic},
+meaning a cell changes depending only on its own state
+and the total number of \inline{One} cells in its neighbourhood.
+Translated into Isabelle we get the following \Cref{code:life_total},
+which contains a one line proof of this simply via ``unfurling'' the definitions.
 
+\begin{myminted}{Outer totalistic Life}{life_total}
+    definition outer_totalistic :: "rule => bool" where
+    "outer_totalistic r ≡ (ALL nb1 nb2. (Centre nb1 = Centre nb2)
+    --> (outer_sum nb1 = outer_sum nb2) --> (r nb1) = (r nb2))"
 
-\begin{myminted}{Totalistic Life}{life_total}
-    definition totalistic :: "rule => bool" where
-    "totalistic r ≡ (ALL nb1 nb2. sum_nb nb1 = sum_nb nb2 --> (r nb1) = (r nb2))"
+    theorem "outer_totalistic life"
+    by apply(simp add: outer_totalistic_def life_def)
 \end{myminted}
-

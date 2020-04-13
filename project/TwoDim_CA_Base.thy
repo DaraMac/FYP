@@ -42,7 +42,7 @@ definition totalistic :: "rule \<Rightarrow> bool" where
 "totalistic r \<equiv> (\<forall> nb1 nb2. sum_nb nb1 = sum_nb nb2 \<longrightarrow> (r nb1) = (r nb2))"
 
 definition outer_totalistic :: "rule \<Rightarrow> bool" where
-"outer_totalistic r \<equiv> (\<forall> nb1 nb2. ((Centre nb1 = Centre nb2) \<and> (outer_sum nb1 = outer_sum nb2)) \<longrightarrow> (r nb1) = (r nb2))"
+"outer_totalistic r \<equiv> (\<forall> nb1 nb2. (Centre nb1 = Centre nb2) \<longrightarrow> (outer_sum nb1 = outer_sum nb2) \<longrightarrow> (r nb1) = (r nb2))"
 
 subsection \<open>Game of life \<close>
 
@@ -56,7 +56,6 @@ definition life :: rule where
 
 (* line balance *)
 theorem "outer_totalistic life"
-apply(simp add: outer_totalistic_def)
-apply auto
-apply(simp add: life_def)
+by apply(simp add: outer_totalistic_def life_def)
+
 end
