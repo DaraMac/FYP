@@ -109,34 +109,127 @@ As shown in \Cref{code:nb_def} the only practical difference is adding more \min
     (SouthWest:cell) (South:cell)  (SouthEast:cell)
 \end{myminted}
 
-\section{Finite Cellular Automata}
+This approach of generating neighbourhoods as an entity distinct from mere cells allowed a higher level approach to dealing with CA.
+It meant that in the finite elementary CA,
+the question of updating cells is solved by simply mapping a \mintinline{isabelle}{rule} over the neighbourhoods,
+see \Cref{code:update_nbhd}.
+By abstracting out a neighbourhood function it also also for minor tweaks to that to entirely change the topology of a finite CA,
+as explained in \Cref{sec:finite_CA}.
+
+
+\begin{myminted}{Updating via neighbourhoods}{update_nbhd}
+    (* Finite one dimensional *)
+    fun update_CA :: "CA => CA" where
+    "update_CA (CA s r) = CA (map r (nbhds s)) r"
+
+    (* Finite two dimensional *)
+    fun update_CA :: "CA => CA" where
+    "update_CA (CA s r) = CA (map (λ xs. map r xs) (nbhds s)) r"
+\end{myminted}
+
+In the two dimensional finite case,
+as state is just a list of lists of cells,
+it requires a mapping of maps over those but the general principle is similar.
+
+\section{Finite Cellular Automata} \label{sec:finite_CA}
 
 There ended up being two separate paths taken in dealing with the cells on the boundary of the finite CA.
 The first,
 which for the purposes of the project is named \emph{bounded},
 is the simplest conceptually,
 but not necessarily in implementation.
+The other is termed \emph{toroidal},
+because using it gives the CA the geometry of a torus or band.
+Despite seeming more complicated,
+implementation is very natural compared to the bounded method.
 
 Bounded CA deal with the problem of determining the neighbourhood of a cell on the edge simply via ``padding''.
-For the purposes 
+What this practically means is that when the neighbourhood function goes to generate the neighbourhood of a cell it knows to be on the edge,
+it pretends that there are actually \mintinline{isabelle}{Zero} cells filling in the blanks and returns a neighbourhood accordingly.
+
+The toroidal method is so called as it essentially ``glues'' the opposite ends of the \mintinline{isabelle}{state} data structure together,
+thus creating a torus in two dimensions,
+or a band in one.
+From a purely mathematical topology perspective this works via altering the neighbourhoods of cells on the extremities,
+to include those cells that should be next to it if it were in a toroidal shape.
 
 
+\subsection{One Dimensional} 
+
+In the one dimensional case this is very easy to implement.
+All that has to be done is stick the additional cells onto the state list,
+and call another function \mintinline{isabelle}{inner_nbhds} that does the obvious action of stepping through the internal items in a list,
+returning the neighbourhoods for each.
+
+\begin{myminted}{Finite one dimensional neighbourhood generation}{finite_1D_nb}
+    type_synonym state = "cell list"
+
+    (* Bounded elementary CA *)
+    fun nbhds :: "state => neighbourhood list" where
+    "nbhds  xs = inner_nbhds (Zero # xs @ [Zero])"
+
+    (* Toroidal elementary CA *)
+    fun nbhds :: "state => neighbourhood list" where
+    "nbhds xs = inner_nbhds ((last xs) # xs @ [hd xs])"
+\end{myminted}
+
+For the bounded automata these additional cells are defined to always be constant \mintinline{isabelle}{Zero} cells.
+It would be equally valid and simple to take these both to be \mintinline{isabelle}{One} or a mix of each,
+but zeroing the boundaries was the most natural choice.
+
+As shown in \Cref{code:finite_1D_nb},
+it only takes a very minor adjustment to the \mintinline{isabelle}{nbhd} function to radically overhaul the topology of the shape produced.
+By changing the cells padded onto the state list to be the last item and head of the original list,
+the cells of each extreme end of the list are associated with each other.
+
+% TODO mention this as a possible n-dim extension later
+Theoretically altering the neighbourhood function is all that is needed to turn a one dimensional list into any finite shape or geometry required.
+However this would require much greater modifications to the base structure of the function
+and so was not the approach taken in transitioning finite CA to two dimensions.
 
 
+\subsection{Two dimensional}
 
+If a one dimensional CA state uses a single list,
+the obvious transition to scale to two dimensions is to use a two dimensional list.
+% TODO mention drawbacks in Chap5
 
+\begin{myminted}{Finite two dimensional neighbourhood generation}{finite_2D_nb}
+    type_synonym state = "cell list list"
 
+    (* function for all 2D neighbourhoods *)
+    fun nbhds :: "state => neighbourhood list list" where
+        "nbhds s = (let h = (int_height s)-1
+        in (let w = (int_width s)-1 in
+        [[get_nbhd s x y. y ← [0..h]]. x ← [0..w]]))"
 
-\section{Analytical Work}
+    (* Toroidal get_nbhd *)
+    fun get_nbhd :: "state => int => int => neighbourhood" where
+        "get_nbhd s x y =
+        (let w = int_width s in
+        (let h = int_height s in
+        list_to_nb [get_cell s ((x+i) mod w) ((y+j) mod h).
+            j ← rev [-1..1], i ← [-1..1]]))"
 
-E.g. Equations, etc. that describe your solution
+    (* Bounded get_cell *)
+    fun get_cell :: "state => int => int => cell" where
+        "get_cell s x y = (if out_of_bounds s x y
+                           then Zero
+                           else  s!(nat x)!(nat y))"
+\end{myminted}
 
+It is very clear from \Cref{code:finite_2D_nb} that the move to two dimensions involved the use of a lot more indices in lists.
+This is due to the fact that pattern matching is not as simple when you have lists of lists,
+so indexing the lists was deemed easier to work with.
 
-\section{Low Level}
+In this case both the bounded and toroidal CA have the same \mintinline{isabelle}{nbhds} function,
+the different shapes are instead produced through changes to an intermediary \mintinline{isabelle}{get_nbhd}, 
+and \mintinline{isabelle}{get_cell}.
+Note how the \mintinline{isabelle}{get_nbhd} function does the work to create a torus by wrapping indices around with \mintinline{isabelle}{mod},
+while in the bounded case \mintinline{isabelle}{get_cell} is responsible for filling in the \mintinline{isabelle}{Zero}s.
 
-E.g. Method specifications, Algorithms, etc.
+\section{Infinite Cellular Automata}
 
+\subsection{One Dimensional}
 
-\section{Implementation}
-
-Discuss anything interesting here; put full source code in an appendix or attachment
+\subsection{Two Dimensional}

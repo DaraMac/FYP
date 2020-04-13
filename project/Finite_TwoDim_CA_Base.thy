@@ -40,6 +40,9 @@ definition uniform :: "state \<Rightarrow> bool" where
 definition oneCentre :: state where
 "oneCentre \<equiv> [[Zero, Zero, Zero], [Zero, One, Zero], [Zero, Zero, Zero]]"
 
+definition offCentre :: state where
+"offCentre \<equiv> [[One, Zero, Zero], [Zero, Zero, Zero], [Zero, Zero, Zero]]"
+
 definition toroidalBlinker :: state where
 "toroidalBlinker \<equiv>
  [replicate 5 Zero,

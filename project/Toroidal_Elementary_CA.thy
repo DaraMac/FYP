@@ -6,10 +6,12 @@ theory Toroidal_Elementary_CA
 begin
 
 
-fun nbhds :: "state \<Rightarrow> neighbourhood list" where
+(*fun nbhds :: "state \<Rightarrow> neighbourhood list" where
 "nbhds [] = []" | (*this should never happen*)
-"nbhds (x#xs) = ((Nb (last xs) x (hd xs)) # (inner_nbhds (x#xs))) @ [Nb (last (butlast xs)) (last xs) x]"
+"nbhds (x#xs) = ((Nb (last xs) x (hd xs)) # (inner_nbhds (x#xs))) @ [Nb (last (butlast xs)) (last xs) x]"*)
 
+fun nbhds :: "state \<Rightarrow> neighbourhood list" where
+"nbhds xs = inner_nbhds ((last xs) # xs @ [hd xs])"
 
 fun update_CA :: "CA \<Rightarrow> CA" where
 "update_CA (CA s r) = CA (map r (nbhds s)) r"
