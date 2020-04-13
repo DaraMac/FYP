@@ -43,4 +43,7 @@ definition life :: rule where
                       then One else Zero) |
             Zero  \<Rightarrow> (if (sum_nb ca) = 3
                       then One else Zero))"
+
+theorem "totalistic life"
+
 end

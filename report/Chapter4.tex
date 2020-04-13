@@ -74,7 +74,6 @@ It is also worth noting that the CA here is not directly defined as a tuple.
 Using a unique datatype carries more semantic weight then giving a \mintinline{isabelle}{type_synonym} to a tuple.
 The same concept does not exist in general mathematics so purely mathematical approaches to formalisms usually just involve a tuple.
 
-
 \subsection{State}
 
 As mentioned in the above paragraphs,
@@ -130,6 +129,8 @@ as explained in \Cref{sec:finite_CA}.
 In the two dimensional finite case,
 as state is just a list of lists of cells,
 it requires a mapping of maps over those but the general principle is similar.
+
+A CA can be run for multiple steps through repeated application of \inline{update_CA} through another function designed for this.
 
 \section{Finite Cellular Automata} \label{sec:finite_CA}
 
@@ -222,14 +223,142 @@ It is very clear from \Cref{code:finite_2D_nb} that the move to two dimensions i
 This is due to the fact that pattern matching is not as simple when you have lists of lists,
 so indexing the lists was deemed easier to work with.
 
+The main \inline{nbhds} function achieves this by a nested list comprehension over the length and width of the CA state,
+and fills in those indices with \inline{get_nbhd}.
+The function \inline{get_nbhd} itself delegates to \inline{get_cell}.
+
 In this case both the bounded and toroidal CA have the same \mintinline{isabelle}{nbhds} function,
-the different shapes are instead produced through changes to an intermediary \mintinline{isabelle}{get_nbhd}, 
+the different shapes are instead produced through changes to the intermediary \mintinline{isabelle}{get_nbhd}, 
 and \mintinline{isabelle}{get_cell}.
 Note how the \mintinline{isabelle}{get_nbhd} function does the work to create a torus by wrapping indices around with \mintinline{isabelle}{mod},
 while in the bounded case \mintinline{isabelle}{get_cell} is responsible for filling in the \mintinline{isabelle}{Zero}s.
 
+For the toroidal CA, \inline{get_cell} just does not default to returning \inline{Zero},
+and for bounded CA,
+\inline{get_nbhd} does not use any modular wrapping.
+
+To understand the indexing used in the two dimensional state,
+the inner lists have to be though of as column vectors moving vertically. % TODO phrase better?
+
+
 \section{Infinite Cellular Automata}
 
-\subsection{One Dimensional}
+Infinite CA are actually simpler because they have no boundaries so there was no need for the all the edge case handling that characterised finite CA.
+However they require discarding conventional data structures like lists,
+for an approach much more grounded in mathematics and functional programming.
 
-\subsection{Two Dimensional}
+
+\subsection{Neighbourhoods}
+
+The neighbourhood does not play quite as big a part in the infinite,
+especially since there were no variations made of the topology.
+However it was still used in the interest of consistency in level of abstraction and definition,
+and to allow for potential future uses of it.
+This allowed the type signature of \inline{rule} to remain unchanged too.
+
+
+\subsection{State}
+
+In the end infinite state,
+and extending it,
+turned out to be much simpler than the finite case.
+One dimensional state simply needs to pair every integer with a cell,
+which naturally works as a function over the integers.
+Note this function is total so the entire state is represented,
+there is no need for a partial function or something of that kind.
+
+Two dimensional state is extended easily from the base case,
+although strictly speaking it is not modelled as a function from the Cartesian product of the integers,
+but just as a function with two integer arguments.
+These two are of course isomorphic,
+but multiple arguments is more easily extensible,
+and allows for partial application and currying.
+
+\begin{myminted}{Infinite state represented as functions}{state_infinite}
+    (* One dimensional *)
+    type_synonym state = "int => cell"
+
+    (* Two dimensional *)
+    type_synonym state = "int => int => cell"
+\end{myminted}
+
+Unlike the finite case,
+the real work for infinite CA is done in updating the state.
+Using \inline{map} was no longer an option as there is no finite data structure to map over.
+Instead a recursive tactic was employed.
+The whole state never explicitly exists at once,
+it cannot as it is infinite,
+but the values of any amount of cells at any stage can always be known.
+The key insight that made this work,
+was to update the \inline{state} function at each stage,
+with the new action on an integer recursively based on what the cell values around it were in the previous stage.
+So when the function is called after a certain amount of updates,
+it calculates the current values needed by recursing all the way back to a base state that was supplied.
+This works very nicely in one dimension,
+but the two dimensional version can no longer be considered elegant.
+
+\begin{myminted}{Infinite transition functions}{update_infinite}
+    (* One dimensional *)
+    fun update_state :: "CA => state" where
+    "update_state (CA s r) n = r (Nb (s (n-1)) (s n) (s (n+1)))"
+
+    (* Two dimensional *)
+    fun update_state :: "CA => state" where
+    "update_state (CA s r) x y =
+        r (Nb (s (x-1) (y+1)) (s x (y+1)) (s (x+1) (y+1))
+              (s (x-1)  y)    (s x  y)    (s (x+1)  y)
+              (s (x-1) (y-1)) (s x (y-1)) (s (x+1) (y-1)))"
+\end{myminted}
+
+Overall due to the definitions used,
+the differences in implementation between one and two dimensional infinite automata,
+were much smaller than the differences in the finite case.
+
+
+\section{Properties}
+
+Due to the way CA and their constituent components were built with the same type signatures,
+most properties built on them could hold with mostly trivial adjustments for the CA type.
+Additionally a lot of common properties about CA, 
+when phrased in the language to describe CA develop here,
+are actually properties about the rule making up a CA.
+These abstractions enabled some properties to apply with no adjustments to all CA types.
+
+In total about fifteen distinct properties of CA were defined,
+some totally generic,
+others,
+like those in \Cref{code:props_1D},
+are specific to the structural constraints of one dimension.
+This number also does not include utility functions necessary to get the CA to work,
+along with ancillary lemmas proved about these for basic simplification properties.
+
+\begin{myminted}{One dimensional structure properties}{props_1D}
+    fun mirror :: "rule => rule" where
+    "mirror r (Nb a b c) = r (Nb c b a)"
+
+    definition amphichiral :: "rule => bool" where
+    "amphichiral r ≡ (ALL c. r c = (mirror r) c)"
+\end{myminted}
+
+Note the \inline{ALL} is simply an ASCII stand for the $\forall$ quantifier.
+
+
+As well as properties about CA types in general,
+two specific rules of CA of interest were defined with some properties proven specifically about them.
+These were Rule 110 for one dimensional CA and Conway's Game of Life for two dimensions.
+
+\subsection{Rule 110}
+Rule 110 is an interesting example as it has been proved to be Turing Complete
+
+\subsection{Game of Life}
+The Game of Life is a two dimensional CA popularised by John Conway and Martin Gardener.
+One key aspect of Life,
+is that is it \emph{totalistic},
+meaning a cell changes depending only on the total number of \inline{One} cells in its neighbourhood.
+
+
+\begin{myminted}{Totalistic Life}{life_total}
+    definition totalistic :: "rule => bool" where
+    "totalistic r ≡ (ALL nb1 nb2. sum_nb nb1 = sum_nb nb2 --> (r nb1) = (r nb2))"
+\end{myminted}
+

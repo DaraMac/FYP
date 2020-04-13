@@ -17,8 +17,6 @@ fun nbhds :: "state \<Rightarrow> neighbourhood list list" where
 "nbhds s = (let h = (int_height s)-1 in (let w = (int_width s)-1 in
  [[get_nbhd s x y. y \<leftarrow> [0..h]]. x \<leftarrow> [0..w]]))"
 
-
-value "(nbhds offCentre)!1!1"
  
 fun update_CA :: "CA \<Rightarrow> CA" where
 "update_CA (CA s r) = CA (map (\<lambda> xs. map r xs) (nbhds s)) r"
