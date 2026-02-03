@@ -3,7 +3,7 @@ $pdf_mode = 5;
 
 # Might need to pass extra flags to pdflatex e.g:
 # $pdflatex = 'pdflatex -shell-escape';
-$xelatex = 'xelatex -shell-escape';
+# $xelatex = 'xelatex -shell-escape';
 
 # Run bibtex or biber whenever it appears necessary to update the bbl files
 # without checking for the existence of the bib files
