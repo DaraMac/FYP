@@ -18,11 +18,11 @@
 *.toc
 *.xdv
 *~
-
 FYP Submission Instructions.pdf
 Final_Year_Project_Handbook.pdf
 Isabelle2019
+_minted*
 autosaves
 dheeraj*
 papers
-_minted*
+report
