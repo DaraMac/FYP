@@ -180,7 +180,6 @@ it only takes a very minor adjustment to the \mintinline{isabelle}{nbhd} functio
 By changing the cells padded onto the state list to be the last item and head of the original list,
 the cells of each extreme end of the list are associated with each other.
 
-% TODO mention this as a possible n-dim extension later
 Theoretically altering the neighbourhood function is all that is needed to turn a one dimensional list into any finite shape or geometry required.
 However this would require much greater modifications to the base structure of the function
 and so was not the approach taken in transitioning finite CA to two dimensions.
@@ -190,7 +189,6 @@ and so was not the approach taken in transitioning finite CA to two dimensions.
 
 If a one dimensional CA state uses a single list,
 the obvious transition to scale to two dimensions is to use a two dimensional list.
-% TODO mention drawbacks in Chap5
 
 \begin{myminted}{Finite two dimensional neighbourhood generation}{finite_2D_nb}
     type_synonym state = "cell list list"
@@ -235,7 +233,7 @@ and for bounded CA,
 \inline{get_nbhd} does not use any modular wrapping.
 
 To understand the indexing used in the two dimensional state,
-the inner lists have to be thought of as column vectors moving vertically. % TODO phrase better?
+the inner lists have to be thought of as column vectors moving vertically.
 
 
 \section{Infinite Cellular Automata}
